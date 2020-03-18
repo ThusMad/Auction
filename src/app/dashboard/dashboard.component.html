@@ -1,0 +1,29 @@
+<div id="dashboard">
+    <div class="discover">
+        <p>Discover</p>
+        <ul>
+            <li *ngFor="let auction of Auctions">
+                <app-auction-item class="discover-item" 
+                    [name]="auction.name" 
+                    [auctionStartPrice]="auction.auctionStartPrice"
+                    [auctionStartTime]="auction.auctionStartTime" 
+                    [placeholder]="auction.placeholder"
+                    [description]="auction.description"
+                    >
+                </app-auction-item>
+            </li>
+        </ul>
+    </div>
+
+    <div>
+        Upcoming
+    </div>
+
+    <div>
+        Favorite
+    </div>
+
+    <div>
+        My Auctions
+    </div>
+</div>

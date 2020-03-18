@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="auth-form">
+        <h2>Create a new account</h2>
+        <form (ngSubmit)="onSubmit()" autocomplete="on">
+            <div class="form-group form-input">
+                <img src="../../../assets/icons/user.svg">
+                <input type="text" formControlName="username" name="Username" autocomplete="username" placeholder="Your username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                    <div *ngIf="f.username.errors.required">Username is required</div>
+                </div>
+            </div>
+            <div class="form-group form-input">
+                <img src="../../../assets/icons/mail.svg">
+                <input type="text" formControlName="email" name="email" autocomplete="email" placeholder="Email adress" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                    <div *ngIf="f.email.errors.required">Email is required</div>
+                </div>
+            </div>
+            <div class="form-group form-input">
+                <img src="../../../assets/icons/key.svg">
+                <input type="password" formControlName="password" name="Password" placeholder="Password" class="form-control" 
+                    autocomplete="new-password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">Password is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button [disabled]="loading" class="btn btn-primary">Sign up</button>
+            </div>
+        </form>
+        <div class="signup-message">
+            <span>
+                Already have an account?
+            </span>
+            <a routerLink="/sign/in" class="btn btn-link">Sign in</a>
+        </div>
+    </div>
+</div>
+
+

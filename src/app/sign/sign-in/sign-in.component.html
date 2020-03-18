@@ -1,0 +1,35 @@
+﻿<div class="container">
+    <div class="auth-form">
+        <h2>Welcome Back!</h2>
+        <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+            <div class="form-group form-input">
+                <img src="../../../assets/icons/user.svg">
+                <input type="text" formControlName="username" placeholder="Username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                    <div *ngIf="f.username.errors.required">Username is required</div>
+                </div>
+            </div>
+            <div class="form-group form-input">
+                <img src="../../../assets/icons/key.svg">
+                <input type="password" formControlName="password" placeholder="Password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">Password is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button [disabled]="loading" class="btn btn-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Sign In
+                </button>
+            </div>
+        </form>
+        <div class="signup-message">
+            <span>
+                Don't have an account? 
+            </span>
+            <a routerLink="/sign/up" class="btn btn-link">Sign up</a>
+        </div>
+    </div>
+</div>
+
+
