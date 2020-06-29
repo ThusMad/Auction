@@ -1,0 +1,143 @@
+<div class="wrapper">
+    <div class="auction-block shadow" *ngIf="!isLoading">
+        <div class="media shadow">
+            <img [src]="auction.images[0]">
+        </div>
+        <div class="info">
+            <div class="title">
+                {{auction.title}}
+            </div>
+            <div class="categories">
+                <span *ngFor="let category of auction.categories" class="category">
+                    {{category.name}} 
+                </span>
+                <span class="category pointer">
+                    by <i routerLink="/profile/view/{{auction.creator.id}}" class="creator">{{auction.creator.username}}</i> 
+                </span>
+            </div>
+            <div class="bidders">
+                <div class="profile-pics">
+                    <div *ngFor="let bidder of bidders" class="profile-pic" >
+                        <img [src]="bidder.img">
+                    </div>
+                    <span>
+                        {{bidders.length}} people participate in the auction
+                    </span>          
+                </div>
+            </div>
+            <div class="parameters">
+                <div class="parameter"> 
+                    <img src="../../../assets/icons/calendar-add.svg">
+                    <div>
+                        <div class="value">
+                            {{creationTime}}
+                        </div>
+                        <div class="name">
+                            Creation Date
+                        </div>
+                    </div>
+                </div>
+                <div class="parameter">
+                    <img src="../../../assets/icons/calendar-add.svg">
+                    <div>
+                        <div class="value">
+                           {{startTime}}
+                        </div>
+                        <div class="name">
+                            Open Date
+                        </div>
+                    </div>
+                </div>
+                <div class="parameter">
+                    <img src="../../../assets/icons/calendar-add.svg">
+                    <div>
+                        <div class="value">
+                            {{endTime}}
+                        </div>
+                        <div class="name">
+                            Close Date
+                        </div>
+                    </div>
+                </div>
+                <div class="parameter">
+                    <img src="../../../assets/icons/dollar-sign.svg">
+                    <div>
+                        <div class="value">
+                            {{auction.startPrice}}<br>
+                            USD
+                        </div>
+                        <div class="name">
+                            Start Price
+                        </div>
+                    </div>
+                </div>
+                <div class="parameter">
+                    <img src="../../../assets/icons/trending-up.svg">
+                    <div>
+                        <div class="value">
+                           {{auction.priceStep}}<br>
+                           USD
+                        </div>
+                        <div class="name">
+                            Price Step
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bid-block" *ngIf="this.auction.startTime < currentTime && !isLoading">
+        <div class="bid-list">
+            <h2>
+                Bids
+            </h2>
+            <app-bidders-list></app-bidders-list>
+        </div>
+        <div class="bid-controller">
+            <h2>
+                Place Bid
+            </h2>
+            <div class="flex-item">
+                <div class="chart-container">
+                <canvas #myCanvas baseChart class="chart"  
+                            [datasets]="lineChartData"
+                            [labels]="lineChartLabels"
+                            [options]="lineChartOptions"
+                            [colors]="lineChartColors"
+                            [legend]="lineChartLegend"
+                            [chartType]="lineChartType"
+                            (chartHover)="chartHovered($event)"
+                            (chartClick)="chartClicked($event)"></canvas>
+                </div>
+            </div>
+            <div class="bid-ctrl">
+                <app-bid-control></app-bid-control>
+            </div>
+        </div>
+        <div class="offers">
+            <h2>
+                You might be interested
+            </h2>
+            <mat-list>
+                <mat-list-item>
+                    <app-offer></app-offer>
+                </mat-list-item>
+                <mat-list-item>
+                    <app-offer></app-offer>
+                </mat-list-item>
+                <mat-list-item>
+                    <app-offer></app-offer>
+                </mat-list-item>
+                <mat-list-item>
+                    <app-offer></app-offer>
+                </mat-list-item>
+            </mat-list>
+        </div>
+    </div>
+    <div class="countdown" *ngIf="this.auction.startTime > currentTime && !isLoading">
+        <app-timer [creationDate]="auction.creationTime" [startDate]="auction.startTime"></app-timer>
+    </div>
+    <div *ngIf="isLoading" class="center">
+        <mat-spinner></mat-spinner>
+    </div>
+</div>  

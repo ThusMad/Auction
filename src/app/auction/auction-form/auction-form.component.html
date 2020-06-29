@@ -1,0 +1,161 @@
+<form class="form-wrapper" [formGroup]="auctionForm" (ngSubmit)="onSubmit()">
+    <div class="image-select">
+        <div class="image-carousel" cdkDropList (cdkDropListDropped)="imageDrop($event)">
+            <div class="preview" *ngFor="let image of media" cdkDrag>
+                <app-image-input [isLoaded]="image.loaded" [imgSrc]="image.src"></app-image-input>
+            </div>
+        </div>
+        <input type="file" (change)="addImage($event)" class="media-input" accept="image/x-png,image/gif,image/jpeg">
+    </div>
+    <div class="auction-form">
+        <div class="product-details blck">
+            <h2>Product Details</h2>
+            <mat-list>
+                <mat-list-item>
+                    <div class="input-wrapper shadow full-width">
+                        <div class="property">
+                            Title
+                        </div>
+                        <div class="value">
+                            <mat-form-field appearance="none" class="title">
+                                <input matInput formControlName="title" 
+                                    placeholder="Title" [errorStateMatcher]="matcher" required>
+                                <mat-error *ngIf="f.title.invalid">
+                                    Title is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </mat-list-item>
+                <mat-list-item class="details-wrapper">
+                    <div class="input-wrapper shadow tall full-width">
+                        <div class="property prop-tall">
+                            Details
+                        </div>
+                        <div class="value">
+                            <mat-form-field appearance="none" class="details">
+                                <textarea matInput formControlName="description" 
+                                    [errorStateMatcher]="matcher" required>
+                                </textarea>
+                                <mat-error *ngIf="f.description.invalid">
+                                    Description is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </mat-list-item>
+                <mat-list-item>
+                    <div class="input-wrapper shadow full-width">
+                        <div class="property">
+                            Categories
+                        </div>
+                        <div class="value">
+                            <mat-form-field appearance="none" class="full-width">
+                                <mat-chip-list #chipList aria-label="Category selection">
+                                <mat-chip
+                                    *ngFor="let category of categories"
+                                    [selectable]="selectable"
+                                    [removable]="removable"
+                                    (removed)="remove(category)">
+                                    {{category.name}}
+                                    <img matChipRemove *ngIf="removable" class="chip-remove" src="../../../assets/icons/x.svg">
+                                </mat-chip>
+                                <input
+                                    class="category-input"
+                                    placeholder="New Category.."
+                                    #catInput
+                                    [matAutocomplete]="auto"
+                                    [matChipInputFor]="chipList"
+                                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                    (matChipInputTokenEnd)="add($event)">
+                                </mat-chip-list>
+                                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                                <mat-option *ngFor="let category of filteredCategories | async" [value]="category.name">
+                                    {{category.name}}
+                                </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </mat-list-item>
+            </mat-list>
+        </div>
+        <div class="auction-details blck">
+            <h2>Auction Settings</h2>
+            <mat-list>
+                <mat-list-item>
+                    <div class="input-wrapper shadow full-width">
+                        <div class="property">
+                            Auction time
+                        </div>
+                        <div class="value">
+                            <mat-form-field appearance="none" class="time">
+                                <input matInput type="text" linkedCalendars="true" timePicker="true" drops="right" ngxDaterangepickerMd formControlName="time"/>
+                                <mat-error *ngIf="f.time.invalid">
+                                    Type is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </mat-list-item>
+                <mat-list-item class="price-settings">
+                    <div class="input-wrapper shadow first">
+                        <div class="property">
+                            Start price
+                        </div>
+                        <div class="value">
+                            <mat-form-field appearance="none" class="start-price">
+                                <input matInput type="number" min="1" formControlName="startPrice"
+                                    [errorStateMatcher]="matcher" required>
+                                <mat-error *ngIf="f.startPrice.invalid">
+                                    Start price is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="input-wrapper shadow second">
+                        <div class="property">
+                            Price step
+                        </div>
+                        <div class="value">
+                            <mat-form-field appearance="none">
+                                <input matInput type="number" min="1" formControlName="priceStep"
+                                    [errorStateMatcher]="matcher" required>
+                                <mat-error *ngIf="f.priceStep.invalid">
+                                    Price step is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </mat-list-item>
+                <mat-list-item>
+                    <div class="input-wrapper shadow full-width">
+                        <div class="property">
+                            Auction type
+                        </div>
+                        <div class="value">
+                            <mat-form-field appearance="none" class="full-width">
+                                <mat-select formControlName="type">
+                                    <mat-option *ngFor="let type of types" [value]="type">
+                                        {{ type }}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="f.type.invalid">
+                                    Type is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </mat-list-item>
+            </mat-list>                
+        </div>
+        <div class="btns">
+            <button mat-flat-button color="primary" type="submit">
+                Create
+            </button>
+            <button mat-flat-button color="warn" (click)="return();">
+                Cancel
+            </button>
+        </div>
+    </div>
+</form>

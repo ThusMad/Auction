@@ -1,0 +1,38 @@
+<div class="item-wrapper shadow">
+    <span class="state">Schedudled</span>
+    <div class="info">
+        <div class="header">
+         <h1>
+            {{auction.title}} 
+         </h1>
+        </div>
+        <div class="categories">
+             <span *ngFor="let category of auction.categories" class="category">
+                 {{category.name}} 
+             </span>
+        </div>
+        <div class="properties">
+            <div class="properties-content">
+                <div class="property">
+                     <img class="icon" src="../../../assets/icons/trending-up.svg">
+                     <span class="value">{{auction.priceStep}} USD</span>
+                </div>
+                <div class="property">
+                 <img class="icon" src="../../../assets/icons/calendar-add.svg">
+                 <span class="value">
+                     {{creationTime}}
+                 </span>
+                 </div>
+                <div class="property">
+                     <img class="icon" src="../../../assets/icons/calendar-add.svg">
+                     <span class="value">
+                        {{startTime}} - <br>
+                        {{endTime}}
+                     </span>
+                </div>
+            </div>
+            <span class="start-price">$ {{auction.startPrice}}</span>
+        </div>
+    </div>
+ </div>
+ 

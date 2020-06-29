@@ -1,0 +1,58 @@
+<div class="card-input-wrapper">
+    <div class="card-visualize">
+        <div (click)="flipIt()" class="card flip-card-front" [class.flipped]="flipped">
+            <div class="card-header">
+                <img class="chip" src="../../../assets/icons/payment/chip.svg">
+                <img class="bank" src="{{bankLogo}}">
+            </div>
+            <div class="card-number">
+                <div>card number</div>
+                <input type="text" placeholder="0000  0000  0000  0000" [textMask]="{mask: card_mask}" [value]="cardnumber" (input)="onSearchChange($event); inputCard($event);" (click)="$event.stopPropagation()">
+            </div>
+            <div class="card-info">
+                <div class="card-holder">
+                    <div>cardholder name</div>
+                    <input type="text" placeholder="e.g. Vitalii Koloshmai" [value]="cardholder" (input)="inputCardholder($event);" (click)="$event.stopPropagation()">
+                </div>
+                <div class="card-expiration">
+                    <div>expiration</div>
+                    <input type="text" placeholder="07/24" [textMask]="{mask: expiration_mask}" [value]="expirationDate" (input)="inputExpiration($event);" (click)="$event.stopPropagation()">
+                </div>
+            </div>
+        </div>
+        <div (click)="flipIt()" class="card flip-card-back" [class.flipped]="!flipped" [class.hidden]="!isLoaded">
+            <div class="magnet-line">
+
+            </div>
+            <div class="security-code" (click)="$event.stopPropagation()">
+                <div>CVC/CVV</div>
+                <input type="text" placeholder="xxx-x" [value]="securityCode" (input)="inputSecurityCode($event);" maxlength="4">
+            </div>
+        </div>
+    </div>
+    <div class="card-form">
+        <div class="card-number">
+            <div class="description">card holder</div>
+            <input type="text" placeholder="e.g. Vitalii Koloshmai" [value]="cardholder" (input)="inputCardholder($event);">
+        </div>
+        <div class="card-holder">
+            <div class="description">card number</div>
+            <input type="text" placeholder="0000  0000  0000  0000" [textMask]="{mask: card_mask}" [value]="cardnumber" (input)="onSearchChange($event); inputCard($event);" >
+        </div>
+        <div class="card-info">
+            <div>
+                <div class="description">expiration date</div>
+                <input type="text" placeholder="07/24" [textMask]="{mask: expiration_mask}" [value]="expirationDate" (input)="inputExpiration($event);">
+            </div>
+            <div>
+                <div class="description">security code</div>
+                <input type="text" placeholder="xxx-x" [value]="securityCode" (input)="inputSecurityCode($event);" (focus)="flipFocus();" (focusout)="flipLostFocus();" maxlength="4">
+            </div>
+        </div>
+    </div>
+    <div class="add-btn" >
+        <button  (click)="submit()">
+            Add
+        </button>
+    </div>
+</div>

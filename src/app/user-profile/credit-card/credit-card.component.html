@@ -1,0 +1,35 @@
+<div class="wrapper shadow" [class.default]="isDefault">
+    <div class="content">
+        <div class="card-type">
+            <div [class.primary]="!isDefault">
+                Universal Card
+            </div>
+        </div>
+        <div class="card-credentials" [class.primary]="!isDefault">
+            <div class="card-number info-item">
+                <div>
+                    {{cardNumber}}
+                </div>
+            </div>
+            <div class="card-expiration info-item">
+                <div>
+                    {{experation}}
+                </div>
+            </div>
+        </div>
+        <div class="card-info">
+            <div class="cardfunds" [class.primary]="!isDefault">
+                {{balance}} <span>USD</span>
+            </div>
+            <div>
+                <img class="bank" [class.grayscale]="!isDefault" src="../../../assets/icons/payment/mastercard.svg">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="circle">
+    <svg height="8" width="8" *ngIf="isDefault">
+        <ellipse cx="4" cy="4" rx="4" ry="4"
+        style="fill:#3246d3;" />
+      </svg>
+</div>

@@ -1,24 +1,44 @@
 .navigation 
   height: 100%
-  -webkit-box-shadow: 0px 0px 1px 1px rgba(0,0,0,0.1)
-  -moz-box-shadow: 0px 0px 1px 1px rgba(0,0,0,0.1)
-  box-shadow: 0px 0px 1px 1px rgba(0,0,0,0.1)
-  background: #FFFFFF
+  width: 220px
   display: block
+
+  .logo
+    padding-top: 20px
+    margin: 0px 10px 20px 15px
+    display: flex
+    align-items: center
+    img
+      padding: 10px
+      float: left
+      height: 35px
+      width: 35px
+    span
+      margin-left: 15px
+      font-size: 22px
+      font-weight: 600
+
+  hr
+    margin: 0
+    border: 0
+    border-top: 1px solid #F3F3F3
 
   .slider
     position: fixed
-    height: 65px
-    width: 68px
-    background: rgba(255, 128, 2, 0.15)
+    height: 50px
+    width: 220px
     transition: 0.3s
-
     .pointer
-      pointer-events: none
-      width: 3px
-      height: 100%
-      background: rgba(255, 128, 2, 1)
-      border-radius: 0px 30px 30px 0px
+      height: 36px
+      width: 146px
+      margin-left: 22px
+      margin-top: 8px
+      border-radius: 8px
+      background: white
+      -webkit-box-shadow: 0px 2px 5px 1px rgba(234, 237, 242, 1)
+      -moz-box-shadow: 0px 2px 5px 1px rgba(234, 237, 242,1)
+      box-shadow: 0px 2px 5px 1px rgba(234, 237, 242,1)
+
 
   .navigationButton 
     height: 25px
@@ -29,33 +49,52 @@
     padding: 0
     list-style: none
   li
-    display: block
-    &:hover
-      -webkit-filter: invert(56%) sepia(23%) saturate(5818%) hue-rotate(358deg) brightness(103%) contrast(106%)
-      filter: invert(56%) sepia(23%) saturate(5818%) hue-rotate(358deg) brightness(103%) contrast(106%)
+    height: 50px
+    padding: 0
+    &:hover span
+      -webkit-filter: invert(29%) sepia(75%) saturate(559%) hue-rotate(192deg) brightness(101%) contrast(99%)
+      filter: invert(29%) sepia(75%) saturate(559%) hue-rotate(192deg) brightness(101%) contrast(99%)
   a
-    padding: 20px
-    height: 25px
-    width: 28px
-    margin: 10px 0px
+    height: 50px
+    width: 100%
+    margin: 0px 0px
     text-decoration: none
-    display: block
+    display: flex
+    justify-content: center
+    flex-direction: column
+    div
+      display: flex
+      align-items: center
+      span
+        margin-top: 2px
+        color: #5c607b
+        float: left
+        font-size: 14px
+        font-weight: 700
+      img
+        margin: 0 20px 0 40px
+        float: left
+        height: 15px
+        width: 15px
+        pointer-events: none
+        display: block
+    &:visited
+      span
+        color: #5c607b
 
   .first
      margin-top: 0px
 
-  img
-    height: 18px
-    width: 18px
-    pointer-events: none
-    margin-left: auto
-    margin-right: auto
-    display: block
-
   .selected
-    -webkit-filter: invert(56%) sepia(23%) saturate(5818%) hue-rotate(358deg) brightness(103%) contrast(106%)
-    filter: invert(56%) sepia(23%) saturate(5818%) hue-rotate(358deg) brightness(103%) contrast(106%)
-    &:hover
-      -webkit-filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(0eg) brightness(0%) contrast(0%)
-      filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(0%)
+    span
+      -webkit-filter: invert(29%) sepia(75%) saturate(559%) hue-rotate(192deg) brightness(101%) contrast(99%)
+      filter: invert(29%) sepia(75%) saturate(559%) hue-rotate(192deg) brightness(101%) contrast(99%)
+      &:hover span
+        color: #5c607b
+    img
+      -webkit-filter: invert(29%) sepia(75%) saturate(559%) hue-rotate(192deg) brightness(101%) contrast(99%)
+      filter: invert(29%) sepia(75%) saturate(559%) hue-rotate(192deg) brightness(101%) contrast(99%)
+      &:hover img
+        -webkit-filter: invert(29%) sepia(75%) saturate(559%) hue-rotate(192deg) brightness(101%) contrast(99%)
+        filter: invert(29%) sepia(75%) saturate(559%) hue-rotate(192deg) brightness(101%) contrast(99%)
      

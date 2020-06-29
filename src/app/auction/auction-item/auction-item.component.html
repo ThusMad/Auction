@@ -1,0 +1,48 @@
+<div class="item-wrapper shadow" [class.selected]="isSelected">
+   <div class="media img-shadow">
+       <img [src]="auction.images[0]"> 
+       <div class="tip" *ngIf="isTip">
+            {{tip}}
+       </div>
+   </div>
+   <div class="info">
+       <div class="header">
+        <h1>
+           {{auction.title}} 
+        </h1>
+        <div class="notification">
+            <img (click)="subscribe($event);" src="../../../assets/icons/bell-{{subscribeType}}.svg">
+        </div>
+       </div>
+       <div class="categories">
+            <span *ngFor="let category of auction.categories" class="category">
+                {{category.name}} 
+            </span>
+            <span class="category pointer">
+                by <i routerLink="/user/{{auction.creator.id}}" class="creator">{{auction.creator.username}}</i> 
+            </span>
+       </div>
+       <div class="properties">
+           <div class="properties-content">
+               <div class="property">
+                    <img class="icon" src="../../../assets/icons/trending-up.svg">
+                    <span class="value">{{auction.priceStep}} USD</span>
+               </div>
+               <div class="property">
+                <img class="icon" src="../../../assets/icons/calendar-add.svg">
+                <span class="value">
+                    {{creationTime}}
+                </span>
+                </div>
+               <div class="property">
+                    <img class="icon" src="../../../assets/icons/calendar-add.svg">
+                    <span class="value">
+                        {{startTime}} - <br>
+                        {{endTime}}
+                    </span>
+               </div>
+           </div>
+            <span class="start-price">$ {{auction.startPrice}}</span>
+       </div>
+   </div>
+</div>

@@ -1,0 +1,54 @@
+:host
+    .bage-wrapper
+        .bage
+            display: flex
+            align-items: center
+            border-radius: 20px
+            background: #F7FAFF
+            float: left
+            padding: 4px
+            -webkit-box-shadow: 0px 4px 16px -4px rgba(0, 0, 0, 0.215)
+            -moz-box-shadow: 0px 4px 16px -4px rgba(0, 0, 0, 0.215)
+            box-shadow: 0px 4px 16px -4px rgba(0, 0, 0, 0.215)
+            img
+                padding: 7px
+                background: #F7FAFF
+                height: 20px
+                width: 20px
+                border-radius: 20px
+    .tooltip 
+        position: relative
+        display: inline-block
+
+        .tooltiptext 
+            visibility: hidden
+            width: 120px
+            background-color: #555
+            color: #fff
+            text-align: center
+            padding: 5px 0
+            border-radius: 6px
+
+            position: absolute
+            z-index: 1
+            bottom: -100%
+            left: 50%
+            margin-left: -30px
+
+            opacity: 0
+            transition: opacity 0.3s
+            &:after 
+                content: ""
+                position: absolute
+                top: -30%
+                left: 20%
+                border-width: 5px
+                border-style: solid
+                border-color: #555 transparent transparent transparent
+                transform: rotate(180deg)
+        &:hover .tooltiptext 
+            visibility: visible
+            opacity: 1
+            text-decoration: none
+
+        

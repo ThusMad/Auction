@@ -1,0 +1,5 @@
+<div class="wrapper">
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <app-profile-auctions [userId] = "userId" class="user-auctions"></app-profile-auctions>
+    <app-profile-sideview [userId] = "userId" class="profile-preview"></app-profile-sideview>
+</div>

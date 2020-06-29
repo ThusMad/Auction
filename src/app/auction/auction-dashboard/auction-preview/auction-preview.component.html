@@ -1,0 +1,73 @@
+<div class="preview-wrapper" *ngIf="auction != undefined">
+    <div class="media-header">
+        <img [src]="auction.images[0]" class="img-shadow">
+        <div class="tip" *ngIf="isTip">
+            Added recently
+        </div>
+    </div>
+    <div class="title">
+        <h2>
+            {{auction.title}}
+        </h2>
+    </div>
+    <div class="blck ctg">
+        <div class="categories">    
+            <span *ngFor="let category of auction.categories" class="category">
+                {{category.name}} 
+            </span>
+            <span class="category pointer">
+                by <i routerLink="/profile/view/{{auction.creator.id}}" class="creator">{{auction.creator.username}}</i> 
+            </span>
+        </div>
+        <div class="notification">
+            <img (click)="subscribe();" src="../../../../assets/icons/bell-{{subscribeType}}.svg">
+        </div>
+    </div>
+    <div class="blck inf">
+        <div class="bages">
+            <div class="bage shadow">
+                <img src="../../../../assets/icons/award.svg">
+            </div>
+            <div class="bage shadow">
+                <img src="../../../../assets/icons/fire.svg">
+            </div>
+        </div>
+        <div class="startPrice">
+            $ {{auction.startPrice}}
+        </div>
+    </div>
+    <div class="blck properties">
+        <div class="property">
+            <img class="icon" src="../../../assets/icons/trending-up.svg">
+            <span class="value">{{auction.priceStep}} USD</span>
+       </div>
+       <div class="property">
+        <img class="icon" src="../../../assets/icons/calendar-add.svg">
+        <span class="value">{{creationTime}}</span>
+        </div>
+        <div class="property">
+            <img class="icon" src="../../../assets/icons/calendar-add.svg">
+            <span class="value">
+                {{startTime}} <br>
+                {{endTime}}
+            </span>
+       </div>
+    </div>
+    <div class="blck about">
+        <h2>
+            About 
+         </h2>
+         <div>
+             {{auction.description}}
+         </div>
+    </div>
+    <div class="photos">
+        <h2>
+           Photos 
+        </h2>
+        <div class="photos-grid">
+            <img *ngFor="let img of auction.images" [src]="img">
+        </div>
+    </div>
+    <button class="join-btn" [routerLink]="'/auction/'+auction.id">Join</button>
+</div>

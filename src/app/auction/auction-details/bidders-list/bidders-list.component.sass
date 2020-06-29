@@ -1,0 +1,69 @@
+$color-accent: #5b6bdc
+$color-hint: #706e8a
+$color-primary: #110d3c
+$color-active: #3246d3
+$color-notactive: #a2a4ac
+
+.wrapper
+    display: flex
+    width: 100%
+    height: 100%
+
+mat-list 
+    width: 100%
+    height: 100%
+    position: relative
+    overflow: auto
+
+mat-list-item
+    border-bottom: 1px solid #ededed
+    .content
+        width: 100%
+        justify-content: space-between
+        .user
+            span
+                margin-left: 10px
+                color: $color-hint
+                font-weight: 600
+                font-size: 16px
+
+    &:last-child
+        border-bottom: 0 
+
+.value
+    color: $color-hint
+    font-weight: 700
+    font-size: 16px
+
+.time
+    color: $color-active
+    font-weight: 600
+    font-size: 14px
+
+.flex
+    display: flex
+
+.center
+    align-items: center
+
+.bid
+    height: 50px
+
+img
+    height: 34px
+    width: 34px
+    object-fit: cover
+    border-radius: 100px
+    
+.pointer
+    cursor: pointer
+
+::-webkit-scrollbar
+    width: 5px
+    background-color: transparent
+::-webkit-scrollbar-thumb 
+    background-color: $color-notactive
+    border-radius: 3px
+
+::ng-deep .mat-list-item-content 
+  padding: 0 !important

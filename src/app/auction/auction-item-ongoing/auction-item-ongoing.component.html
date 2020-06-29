@@ -1,0 +1,30 @@
+<div class="auction-item-wrapper" [routerLink]="['/auction', auction.id]">
+    <div class="image-container">
+        <img class="item-image" [src]="'https://localhost:44391/' + auction.images[0]">
+    </div>
+    <div class="item-info">
+        <div class="item-name">
+            <div class="nameholder" title="{{auction.title}}">{{auction.title}}</div>
+            <button class="bid-btn">
+                Bid
+            </button>
+        </div>
+        <div class="seller">
+            <span>by </span>
+            <a [routerLink]="['/profile', 5]">{{auction.creator.username}}</a>
+        </div>
+        <div class="item-progress">
+            <div class="bid-container">
+                <span>Current bid</span>
+                <span class="current-bid">$345</span>
+            </div>
+            <div class="progress-bar">
+                <progress max="{{startTime}}" value="{{currentTime}}"></progress>
+            </div>
+            <div class="timer-container">
+                <span>Time left</span>
+                <span class="timer">{{days}}d {{hours}}h {{min}}m {{sec}}s</span>
+            </div>
+        </div>
+    </div>
+</div>

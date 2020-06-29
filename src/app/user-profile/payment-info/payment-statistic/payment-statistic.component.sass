@@ -1,0 +1,49 @@
+$color-accent: #5b6bdc
+$color-hint: #706e8a
+$color-primary: #110d3c
+$color-active: #3246d3
+$color-notactive: #a2a4ac
+$color-bold: #120e3d
+
+.wrapper
+    display: flex
+    flex-flow: column
+    padding-right: 60px
+
+.content
+    display: flex
+    flex-flow: row
+    justify-content: space-between
+
+.header
+    display: flex
+    justify-content: space-between
+    h2
+        color: #333333
+        font-weight: 700
+        font-size: 24px
+    span
+        color: $color-notactive
+        font-weight: 500
+        font-size: 14px
+
+.item
+    display: flex
+    flex-flow: column
+    height: 100px
+    width: 100px
+    justify-content: space-between
+    align-items: center
+    padding: 20px
+
+.value
+    margin-top: 15px
+    color: $color-primary
+    font-weight: 800
+    font-size: 22px
+
+.title
+    color: $color-hint
+    font-weight: 600
+    font-size: 16px
+    margin-bottom: 15px

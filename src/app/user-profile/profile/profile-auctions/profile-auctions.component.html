@@ -1,0 +1,14 @@
+<div class="wrapper">
+    <div class="content">
+        <mat-list>
+            <mat-list-item *ngFor="let auction of auctions">
+                <app-profile-auction-item [auction]="auction" ></app-profile-auction-item>
+            </mat-list-item>
+            <mat-list-item>
+                <div class="dummy">
+
+                </div>
+            </mat-list-item>
+        </mat-list>
+    </div>
+</div>

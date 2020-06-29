@@ -20,15 +20,19 @@ export class NavigationComponent implements OnInit {
 
     router.events.pipe(
       filter(event => event instanceof NavigationEnd)  
-    ).subscribe((event: NavigationEnd) => {
+    ).subscribe((event: NavigationStart) => {
+      var uriBegining = '/' + event.url.split('/')[1];
+
       for(var i = 0; i < this.navButtons.length; i++) {
           var link = this.navButtons[i].getAttribute('routerLink');
 
-          if(event.url.includes(link)) {
+          if(uriBegining.includes(link)) {
             this.navigateTo(this.navButtons[i]);
             return;
           }
       }
+      
+      this.slider.hidden = true;
   });
   }
 
@@ -39,15 +43,11 @@ export class NavigationComponent implements OnInit {
   }
 
   navigateTo(element : Element) {
-    if(this.currentSelected != null) {
-      this.currentSelected.classList.remove('selected');
-    }
     if(this.slider.hidden) {
       this.slider.hidden = false;
     }
 
-    element.classList.add('selected'); 
-    this.slider.style.top = this.offset(element).top - 5 + "px";
+    this.slider.style.top = this.offset(element).top + "px";
     
     this.currentSelected = element;
   }

@@ -1,0 +1,21 @@
+<div class="general-wrapper">
+    <mat-list>
+        <mat-list-item >
+            <app-setting-input property="Name" value="{{user.firstName}} {{user.lastName}}"></app-setting-input>
+        </mat-list-item>
+        <mat-list-item>
+            <app-setting-input property="Username" [value]="user.username"></app-setting-input>
+        </mat-list-item>
+        <mat-list-item>
+            <app-setting-input property="Email" [value]="user.email"></app-setting-input>
+        </mat-list-item>
+        <mat-list-item>
+            <app-setting-input property="Phone" value="+38(068) 888 88 88 "></app-setting-input>
+        </mat-list-item>
+        <mat-list-item class="save-btn">
+            <button>
+                SAVE SETTINGS
+            </button>
+        </mat-list-item>
+    </mat-list>
+</div>

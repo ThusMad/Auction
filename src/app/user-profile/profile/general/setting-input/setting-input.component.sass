@@ -1,0 +1,38 @@
+$color-accent: #5b6bdc
+$color-hint: #706e8a
+$color-primary: #110d3c
+$color-active: #3246d3
+$color-notactive: #a2a4ac
+$color-bold: #120e3d
+
+.setting-wrapper
+    width: 50%
+    height: 54px
+    background: white
+    border-radius: 12px
+    border: 2px solid transparent
+    display: flex
+    cursor: pointer
+    align-items: center
+
+.selected
+    border: 2px solid $color-accent
+
+.property
+    margin-left: 25px 
+    font-size: 16px
+    font-weight: 700
+    color: $color-hint
+
+.value
+    position: absolute
+    left: 150px
+    font-size: 20px
+    font-weight: 700
+    color: #5c607b
+  
+
+.shadow
+    -webkit-box-shadow: 0px 4px 16px -4px rgba(0,0,0,0.15)
+    -moz-box-shadow: 0px 4px 16px -4px rgba(0,0,0,0.15)
+    box-shadow: 0px 4px 16px -4px rgba(0,0,0,0.15)

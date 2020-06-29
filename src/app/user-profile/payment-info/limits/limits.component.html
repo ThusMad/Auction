@@ -1,0 +1,26 @@
+<div class="wrapper">
+    <app-limits-item 
+        [value]="fundsInt" 
+        [subValue]="fundsDec" 
+        unit="$" 
+        backgroundColor="#dcdff2" 
+        title="Own funds" 
+        iconUrl="../../../../../assets/icons/briefcase.svg">
+    </app-limits-item>
+    <app-limits-item 
+        [value]="fee" 
+        unit="%" 
+        iconUrl="../../../../../assets/icons/tag.svg" 
+        backgroundColor="#fdf2d3" 
+        title="Fee">
+    </app-limits-item>
+    <app-limits-item 
+        value="2,500" 
+        subValue=".00" 
+        unit="$" 
+        iconUrl="../../../../../assets/icons/credit-card.svg" 
+        backgroundColor="#fbeaea" 
+        title="Credit limit">
+    </app-limits-item>
+</div>
+

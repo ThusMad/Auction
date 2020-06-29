@@ -1,0 +1,40 @@
+<div class="wrapper">
+    <div class="header">
+        <h2>Payment Statisic</h2>
+        <span>the last 30 days</span> 
+    </div>
+    <div class="content" *ngIf="isLoaded">
+        <div class="item">
+            <div class="value">
+                {{statistic.awaiting}}
+            </div>
+            <div class="title">
+                Awaiting
+            </div>
+        </div>
+        <div class="item">
+            <div class="value">
+                {{statistic.completed}}
+            </div>
+            <div class="title">
+                Completed
+            </div>
+        </div>
+        <div class="item">
+            <div class="value">
+                {{statistic.canceled}}
+            </div>
+            <div class="title">
+                Canceled
+            </div>
+        </div>
+        <div class="item">
+            <div class="value">
+                {{statistic.inProgress}}
+            </div>
+            <div class="title">
+                In Progress
+            </div>
+        </div>
+    </div>
+</div>

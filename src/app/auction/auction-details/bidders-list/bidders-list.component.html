@@ -1,0 +1,14 @@
+<div class="wrapper">
+    <mat-list>
+        <mat-list-item *ngFor="let bid of bids" class="bid">
+            <div class="content flex center">
+                <div class="user flex center pointer" [routerLink]="'/profile/view/'+bid.value.user.id">
+                    <img [src]="bid.value.user.profileImage">
+                    <span class="username" >{{bid.value.user.username}}</span>
+                </div>
+                <span class="value">{{bid.value.amount}}</span>
+                <span class="time">{{bid.time}}</span>
+            </div>
+        </mat-list-item>
+    </mat-list>
+</div>

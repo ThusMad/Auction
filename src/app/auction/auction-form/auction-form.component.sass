@@ -1,0 +1,192 @@
+$color-accent: #5b6bdc
+$color-hint: #706e8a
+$color-primary: #110d3c
+$color-active: #3246d3
+$color-notactive: #a2a4ac
+$color-bold: #120e3d
+
+.form-wrapper
+    height: 90%
+    display: flex
+    flex-flow: row
+    margin-top: 20px
+    margin-right: 30px
+    padding: 20px
+    .auction-form
+        padding: 10px
+        border-radius: 12px
+        flex: 1
+    .blck
+        display: flex
+        flex-flow: column
+        h2
+            margin-top: 5px
+            padding: 0
+            margin-left: 20px
+            color: $color-primary
+            font-size: 22px
+            font-weight: 600
+    .media-input
+        width: 100%
+        margin-left: 160px
+        margin-top: 50px
+        color: transparent
+        background: transparent
+        outline: none
+        &:before
+            color: white
+            content: 'Add Media'
+            display: inline-block
+            background: #ff4081
+            border: 0
+            border-radius: 6px
+            padding: 12px 50px
+            outline: none
+            white-space: nowrap
+            -webkit-user-select: none
+            cursor: pointer
+            font-weight: 700
+            font-size: 16px
+    .media-input::-webkit-file-upload-button 
+        visibility: hidden
+    .image-select
+        margin-top: 60px
+        margin-left: 20px
+        width: 530px
+        .image-carousel
+            display: grid
+            grid-gap: 1px
+            grid-template-columns: repeat(3, 33%)
+            align: left
+            .preview
+                margin-bottom: 10px
+                display: inline-block
+                cursor: move
+                img
+                    border-radius: 12px
+                    height: 200px
+                    width: 150px
+                    object-fit: cover
+
+.input-wrapper
+    margin-bottom: 12px
+    width: 50%
+    height: 56px
+    background: white
+    border-radius: 12px
+    border: 2px solid transparent
+    display: flex
+    align-items: flex-start
+    cursor: pointer
+    align-items: center
+
+input
+    margin-top: 12px
+
+mat-select
+    margin-top: 10px
+
+.category-input
+    margin-top: 13px !important
+
+.selected
+    border: 2px solid $color-accent
+
+.property
+    margin-left: 25px 
+    font-size: 18px
+    font-weight: 700
+    color: $color-hint
+
+.prop-tall
+    position: absolute 
+    top: 24px
+
+.value
+    position: absolute
+    left: 170px
+    font-size: 20px
+    font-weight: 700
+    color: #5c607b
+    align: left
+    width: calc( 100% - 200px )
+
+mat-option
+    font-size: 20px
+    font-weight: 700
+    color: #5c607b
+
+.tall
+    height: 200px !important
+
+mat-form-field
+    width: 300px
+
+.full-width
+    width: 100%
+
+.full-width
+    width: 100%
+
+.chip-remove
+    margin-left: 6px
+    height: 16px
+    width: 16px
+
+.time
+    width: 614px
+
+.btns
+    margin-left: 15px
+    button
+        margin-right: 10px
+
+.start-price
+    margin-right: 14px
+
+mat-list-item
+    height: auto !important
+    margin-top: 4px
+
+mat-form-field.title, mat-form-field.details
+    width: 100%
+    
+mat-form-field.details
+    textarea.mat-input-element
+        height: 140px
+        resize: none
+        border-radius: 10px
+        width: 100%
+        border: 1px solid #c0c2cc
+
+
+.price-settings .input-wrapper 
+    margin-left: 20px
+
+.first
+    margin-left: 0px !important
+
+.second
+    .value
+        left: calc( 50% + 150px  )
+
+.cdk-drag-preview 
+    img
+        border-radius: 12px
+        height: 200px
+        width: 150px
+        object-fit: cover
+
+.cdk-drag-placeholder 
+  opacity: 0
+
+.cdk-drag-animating 
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1)
+
+.image-carousel.cdk-drop-list-dragging .preview:not(.cdk-drag-placeholder) 
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1)
+
+.shadow
+    -webkit-box-shadow: 0px 4px 16px -4px rgba(0,0,0,0.15)
+    -moz-box-shadow: 0px 4px 16px -4px rgba(0,0,0,0.15)
+    box-shadow: 0px 4px 16px -4px rgba(0,0,0,0.15)

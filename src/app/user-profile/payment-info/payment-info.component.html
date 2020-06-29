@@ -1,0 +1,36 @@
+<div class="payment-info-wrapper">
+    <div class="payment-methods-wrapper">
+        <div class="title">
+            <h2>
+                Your Cards
+            </h2>
+            <button (click)="cardDialog()">
+                <span>New card</span>
+                <img src="../../../assets/icons/plus.svg">
+            </button>
+        </div>
+        <div class="payment-methods">
+            <owl-carousel-o [options]="customOptions">
+                <ng-template *ngFor="let item of creditCards" carouselSlide>
+                    <app-credit-card [cardNumber] = "item.card.cardNumber" [isDefault]="item.isDefault" [experationTimestamp] = "item.card.expiration" carouselSlide></app-credit-card>
+                </ng-template>
+              </owl-carousel-o>
+        </div>
+    </div>
+    <div class="payment-info">
+        <div class="stat">
+            <div class="payment-limits">
+                <app-limits></app-limits>
+            </div>
+            <hr>
+            <div class="payment-statistic">
+                <app-payment-statistic></app-payment-statistic>
+            </div>
+        </div>
+        <div class="recent-payment">
+            <app-recent-activity>
+
+            </app-recent-activity>
+        </div>
+    </div>
+</div>

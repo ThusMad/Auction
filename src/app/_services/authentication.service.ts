@@ -1,32 +1,87 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map, timestamp } from 'rxjs/operators';
-
+import { map, timestamp, pairwise } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 import { User } from '../_models/user.model';
 import { environment } from 'src/environments/environment';
+import { ActivatedRoute, Router, NavigationEnd, RoutesRecognized } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
 
-    constructor(private http: HttpClient) {
-        this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
-        this.currentUser = this.currentUserSubject.asObservable();
+    public isAuthtorized : boolean = false;
+
+    returnUrl: string;
+
+    constructor(private http: HttpClient, 
+        private route: ActivatedRoute,
+        private router: Router) {
+        var authCache = sessionStorage.getItem('authtorized')
+        this.isAuthtorized = JSON.parse(JSON.parse(authCache))
+
+        if(this.isAuthtorized === null) {
+            this.isAuthtorized = false;
+        }
     }
 
-    public get currentUserValue(): User {
-        return this.currentUserSubject.value;
-    }
+    obtainToken(username: string, password: string) {
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
-    login(username: string, password: string) {
         let requestBody = {
             username: username,
             password: password
         }
 
-        return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, JSON.stringify(requestBody), 
+        return this.http.post<any>(`${environment.apiUrl}/oauth/token`, JSON.stringify(requestBody), 
+            {
+                params: {
+                    timestamp: new Date().getTime().toString(),
+                    recvWindow: '500'
+                },
+                observe: "response",
+                withCredentials: true
+            })
+            .pipe(map(response => {
+                console.log(response);
+                this.isAuthtorized = true;
+                sessionStorage.setItem('authtorized', JSON.stringify(true));
+                this.router.navigate([this.returnUrl]);
+                return response;
+            }));
+    }
+
+    refreshToken() : Observable<any> {
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
+        return this.http.get<any>(`${environment.apiUrl}/oauth/refresh`, 
+        {
+            params : {
+                timestamp : new Date().getTime().toString(),
+                recvWindow : '1000'
+            },
+            withCredentials : true,
+            observe : "response"
+        })
+        .pipe(map((response:any) => {
+            console.log(response);
+            this.isAuthtorized = true;
+            sessionStorage.setItem('authtorized', JSON.stringify(true));
+            this.router.navigate([this.returnUrl]);
+            return response;
+        }));
+    }
+
+    register(username: string, password: string, email : string) {
+        let requestBody = {
+            username: username,
+            email: email,
+            password: password
+        }
+
+        return this.http.post<any>(`${environment.apiUrl}/account/create`, JSON.stringify(requestBody), 
             {
                 params: {
                     timestamp: new Date().getTime().toString(),
@@ -34,15 +89,19 @@ export class AuthenticationService {
                 }
             })
             .pipe(map(user => {
-                localStorage.setItem('currentUser', JSON.stringify(user).replace("\\", ""));
+                sessionStorage.setItem('currentUser', JSON.stringify(user));
                 this.currentUserSubject.next(user);
                 return user;
             }));
     }
 
+    loadFromLocalStorage() {
+    }
+
     logout() {
         // remove user from local storage to log user out
-        localStorage.removeItem('currentUser');
-        this.currentUserSubject.next(null);
+        this.isAuthtorized = false;
+        sessionStorage.setItem('authtorized', JSON.stringify(false));
+        sessionStorage.removeItem('currentUser');
     }
 }

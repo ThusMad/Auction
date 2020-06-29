@@ -1,0 +1,16 @@
+<div class="components">
+    <div class="nav">
+        <div *ngFor="let button of buttons" 
+            (click)="setActive(button)" 
+            [routerLink]="button.link" 
+            class="nav-btn">
+            <button type="button" class="btn" [ngClass]="{'active': button.isClicked}">
+                {{ button.text }}
+            </button>
+        </div>
+        <div #slider class="slider"></div>
+    </div>
+    <div class="router">
+        <router-outlet></router-outlet>
+    </div>
+</div>

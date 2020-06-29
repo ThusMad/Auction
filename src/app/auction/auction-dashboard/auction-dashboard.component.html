@@ -1,0 +1,52 @@
+<div class="wrapper">
+    <div class="view-wrapper">
+        <div class="header">
+            <div class="nav">
+                <div *ngFor="let button of filterButtons" (click)="setActive(button)" class="nav-btn">
+                    <button type="button" class="btn" [ngClass]="{'active': button.isClicked}">
+                        {{ button.text }}
+                    </button>
+                </div>
+                <div #slider class="slider">
+    
+                </div>
+            </div>
+            <div class="actions">
+                <button routerLink="/auction/new" class="btn add-btn shadow">
+                    <div>
+                        <img src="../../../assets/icons/plus.svg">
+                        List new
+                    </div>
+                </button>
+                <form [formGroup]="searchForm" class="srch-form">
+                    <div class="form-input shadow">
+                        <input  type="text" formControlName="searchText" placeholder="Search for auctions...">
+                        <button class="search-btn btn">
+                            <img src="../../../assets/icons/search.svg">
+                        </button>
+                    </div>  
+                </form>
+            </div>
+        </div>
+        <div class="content">   
+            <div *ngIf="loading" class="spiner">
+                <mat-spinner></mat-spinner>
+            </div>     
+            <div *ngIf = "!loading">
+                <app-auction-item *ngFor="let item of Auctions" class="auction-item"
+                    (click) = "selectAuction(item)"
+                    [auction]="item.auction"
+                    [isSelected]="item.isSelected">
+                </app-auction-item>
+                <div class="load-btn shadow" (click)="loadMore()" >
+                    Load more
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-preview" [class.preview]="selectedAuction != undefined">
+       <app-auction-preview [auction]="selectedAuction" >
+       </app-auction-preview>    
+    </div>
+</div>
+

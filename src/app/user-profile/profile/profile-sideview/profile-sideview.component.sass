@@ -1,0 +1,189 @@
+$color-accent: #5b6bdc
+$color-hint: #706e8a
+$color-primary: #110d3c
+$color-active: #3246d3
+$color-notactive: #a2a4ac
+$color-bold: #120e3d
+
+button
+    background: transparent
+    border: 0
+    img
+        height: 28px
+        width: 28px
+
+.wrapper
+    flex-flow: column
+
+
+.wrapper
+    height: 100%
+    background: white
+    z-index: 2000
+    .header
+        flex-flow: column
+        margin-top: 40px
+        .info
+            flex-flow: column
+            div
+                margin-top: 13px
+
+.header-buttons
+    padding-left: 30px
+    justify-content: space-between
+    margin-bottom: 15px
+
+.btn-logout
+    margin-right: 60px    
+
+.fullname
+    color: $color-bold
+    font-weight: 700
+    font-size: 28px
+
+.username
+    color: $color-hint
+    font-size: 16px
+    font-weight: 700
+
+.profile-pic
+    margin-top: 10px
+    height: 200px
+    width: 200px
+    object-fit: cover
+    border-radius: 30px
+    &:hover .curtain
+        height: 31px !important
+        margin-top: 0
+        img
+            height: 15px
+            pointer-events: fill
+            cursor: pointer
+
+.popped
+    height: 31px !important
+    img
+        height: 15px !important
+
+.flex
+    display: flex
+    width: 100%
+
+.center
+    margin: 0 auto 
+
+.status
+    padding: 4px 14px
+    font-size: 16px
+    font-weight: 600
+    border-radius: 4px
+
+.premium
+    color: #F2764C
+    background: #FDF1EC
+
+.about
+    padding: 0px 30px
+
+.statistic-grid
+    padding: 30px
+    width: 100%
+    display: grid
+    grid-template-columns: 45% 45%
+    grid-row: auto auto
+    grid-column-gap: 10%
+    grid-row-gap: 20px
+
+.statistic-item
+    height: 160px
+    background: #F7FAFF
+    border-radius: 20px
+
+.statistic-item-title
+    margin-top: 34px
+    margin-left: 24px
+    color: $color-hint
+    font-weight: 600
+    font-size: 22px
+
+.statistic-item-value
+    margin-top: 24px
+    margin-left: 24px
+    color: $color-primary
+    font-weight: 600
+    font-size: 26px
+    line-height: 30px
+
+.about div
+    width: 100%
+    height: auto
+    overflow: hidden
+    border: 0
+    color: $color-hint
+    font-weight: 500
+    font-size: 16px
+
+mat-spinner
+    margin: auto
+
+.nav
+  margin-top: 36px
+  display: flex
+  position: relative
+  button
+    border: 0
+    background: transparent
+    color: $color-notactive
+    font-size: 26px
+    font-weight: 700
+    transition: 0.2s ease
+  .active
+    color: $color-active
+  .nav-btn
+    margin-right: 12px
+    &:last-child
+      margin-right: 0px
+
+.router
+    padding-top: 20px
+
+.slider
+  position: relative
+  margin-left: 5px
+  top: 42px
+  left: 0
+  height: 4px
+  width: 34px
+  background: $color-active
+  border-radius: 100px
+  position: absolute
+  transition: 0.3s
+
+input[type="file"]
+    opacity: 0
+    filter: alpha(opacity=0)
+    display: block
+    width: 200px
+    height: 200px
+    position: absolute
+    cursor: pointer
+
+.curtain
+    position: relative
+    display: flex
+    height: 0px
+    width: 200px
+    background-color: rgba(129, 129, 129, 0.8)
+    border-radius: 0px 0px 30px 30px
+    bottom: 50px
+    margin-top: 30px
+    pointer-events: none
+    transition: 0.3s
+    img
+        height: 0
+        margin: auto
+
+.shadow
+    -webkit-box-shadow: 0px 4px 16px -4px rgba(0,0,0,0.15)
+    -moz-box-shadow: 0px 4px 16px -4px rgba(0,0,0,0.15)
+    box-shadow: 0px 4px 16px -4px rgba(0,0,0,0.15)

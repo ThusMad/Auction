@@ -1,0 +1,209 @@
+$color-accent: #5b6bdc
+$color-hint: #706e8a
+$color-primary: #110d3c
+$color-active: #3246d3
+$color-notactive: #a2a4ac
+$color-bold: #120e3d
+
+.preview-wrapper
+    overflow: scroll 
+    display: flex
+    flex-flow: column
+    align-items: center
+    padding-top: 70px
+    position: relative
+    background: white
+    width: 100%
+    height: 93%
+
+.tip
+  position: absolute
+  top: 90px
+  margin-left: 20px
+  border-radius: 6px
+  font-size: 20px
+  padding: 10px 12px
+  color: #524e71
+  font-weight: 700
+  background: #F7FAFF
+
+.notification
+    margin-right: 50px
+    img
+        width: 22px
+        height: 22px
+
+.media-header
+    display: flex
+    align-items: center
+    img 
+        width: 400px
+        height: 260px
+        object-fit: cover
+        border-radius: 30px
+
+.title
+    display: flex
+    width: 100%
+    margin-top: 30px
+    
+    align-items: flex-start
+    h2
+        margin-left: 35px
+        color: $color-bold
+        font-weight: 700
+        font-size: 28px
+   
+.ctg
+    margin-top: 10px
+    justify-content: space-between
+
+.categories
+    margin-left: 35px
+
+.category
+    color: $color-hint
+    font-size: 16px
+    font-weight: 700
+    margin-right: 4px
+    &:after
+        margin-left: 4px
+        content: "|"
+    &:last-child 
+        &:after
+            margin-left: 0px
+            content: ""
+    i
+      cursor: pointer
+
+.inf
+    margin-top: 20px
+    align-items: center
+    justify-content: space-between
+
+.startPrice
+    color: $color-active
+    font-size: 26px
+    font-weight: 700
+    margin-right: 35px
+
+.bages
+    margin-left: 35px
+    display: flex
+
+.bage
+    margin-right: 10px
+    background: #F7FAFF
+    width: 50px
+    height: 50px
+    border-radius: 100px
+    display: flex
+    align-itms: center
+    justify-content: center
+    img
+        margin: auto
+        height: 22px
+        width: 22px
+
+    &:last-child
+        margin-right: 0px
+
+.properties
+    margin-top: 30px
+    width: 100%
+    justify-content: space-between
+
+.property
+  display: flex
+  align-items: flex-start
+  margin-right: 20px
+  .icon
+    padding-top: 2px
+    height: 18px
+    width: 18px
+    margin-right: 6px
+  .value
+    padding-top: 2px
+    color: $color-hint
+    font-weight: 800
+  &:first-child
+    margin-left: 35px
+  &:last-child
+    margin-right: 35px
+
+.about
+    display: flex
+    flex-flow: column
+    h2
+      color: $color-bold
+      font-size: 24px
+      margin-left: 35px
+      font-weight: 400
+    div
+      color: $color-hint
+      margin-left: 35px
+      padding-right: 35px
+      word-wrap: break-word
+      overflow-wrap: break-word
+
+.join-btn
+  background: $color-active !important
+  display: flex
+  align-items: center
+  border-radius: 10px
+  border: 0
+  padding: 5px 45px
+  display: flex
+  align-items: center
+  font-size: 16px
+  font-weight: 500
+  margin-top: 20px
+  margin-left: 35px
+  color: white
+
+.photos
+    width: 100%
+    display: flex
+    align-items: flex-start
+    flex-flow: column
+    margin-top: 30px
+    h2
+        color: $color-bold
+        font-size: 24px
+        margin-left: 35px
+        font-weight: 400
+    .photos-grid
+        margin-top: 20px
+        margin-left: 35px
+
+.photos-grid
+    display: grid
+    grid-template-columns: 30% 30% 30%
+    grid-gap: 10px
+    img 
+        width: 100%
+        height: 120px
+        object-fit: cover
+        border-radius: 25px
+
+.blck
+    width: 100%
+    display: flex
+
+.shadow
+    -webkit-box-shadow: 0px 4px 16px -4px rgba(0,0,0,0.215)
+    -moz-box-shadow: 0px 4px 16px -4px rgba(0,0,0,0.215)
+    box-shadow: 0px 4px 16px -4px rgba(0,0,0,0.215)
+
+.img-shadow
+  -webkit-box-shadow: 17px 17px 65px 2px rgba(234, 237, 242, 1)
+  -moz-box-shadow: 17px 17px 65px 2px rgba(234, 237, 242, 1)
+  box-shadow: 17px 17px 65px 2px rgba(234, 237, 242, 1)
+
+  
+::-webkit-scrollbar 
+    width: 0px
+    background: transparent
+
+::-webkit-scrollbar-thumb 
+    background: #FF0000

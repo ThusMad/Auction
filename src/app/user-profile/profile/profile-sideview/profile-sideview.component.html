@@ -1,0 +1,74 @@
+<div class="wrapper flex">
+    <div class="header flex">
+        <div class="header-buttons flex">
+            <div class="btn-group">
+                <button><img src="../../../assets/icons/user-check.svg"></button>
+            </div>
+            <button class="btn-logout" (click)="out();" ><img src="../../../assets/icons/log-out.svg"></button>
+        </div>
+        <div class="info flex">
+            <div class="profile-pic file-upload-img center">
+                <input type="file" (change)="addImage($event)" accept="image/png, image/jpeg"/>
+                <img class="profile-pic center shadow" *ngIf="!profilePic.src" src="../../../assets/backgrounds/placeholder.jpg">
+                <img class="profile-pic center shadow" *ngIf="profilePic.src" [src]="profilePic.src">
+                <div class="curtain center" [class.popped]="profilePic.isLoaded">
+                    <img *ngIf="!profilePic.isLoaded" src="../../../../assets/icons/maximize.svg">
+                    <img *ngIf="profilePic.isLoaded" (click)="saveImage();" src="../../../../assets/icons/save.svg">
+                    <img *ngIf="profilePic.isLoaded" (click)="discardImage();" src="../../../../assets/icons/x.svg">
+                </div>
+            </div>
+            <div class="fullname center">
+                {{user.firstName}} {{user.lastName}}
+            </div>
+            <div class="username center">
+                @{{user.username}}
+            </div>
+            <div class="center premium status shadow" *ngIf="!userId">
+                {{role}}
+            </div>
+            <div class="about">
+                <h2>
+                    About
+                </h2>
+                <div *ngIf="user.about">{{user.about}}</div>
+                <div *ngIf="!user.about">Apparently, this user prefers to keep an air of mystery about them😨😨.</div>
+            </div>
+        </div>
+    </div>
+    <div class="statistic flex">
+        <div class="statistic-grid">
+            <div class="statistic-item shadow">
+                <div class="statistic-item-title">
+                    Bids
+                </div>
+                <div class="statistic-item-value">
+                    4023
+                </div>
+            </div>
+            <div class="statistic-item shadow">
+                <div class="statistic-item-title">
+                    Auctions
+                </div>
+                <div class="statistic-item-value">
+                    12
+                </div>
+            </div>
+            <div class="statistic-item shadow">
+                <div class="statistic-item-title">
+                    Auctions winned
+                </div>
+                <div class="statistic-item-value">
+                    12
+                </div>
+            </div>
+            <div class="statistic-item shadow">
+                <div class="statistic-item-title">
+                    User from
+                </div>
+                <div class="statistic-item-value">
+                    12 aug 2020
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

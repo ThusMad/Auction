@@ -4,12 +4,60 @@
     <div class="slider">
         <div class="pointer"></div>
     </div>
+    <div class="logo">
+        <img src="../../assets/icons/logo.svg">
+        <span>
+            Auction
+        </span>
+    </div>
     <ul>
-        <li><a routerLink="/dashboard" class="nav-item first"><img src="../../assets/icons/dashboard.svg"></a></li>
-        <li><a routerLink="/auction" class="nav-item" ng-click="load()"><img src="../../assets/icons/auction.svg"></a></li>
-        <li><a routerLink="/watched"  class="nav-item"><img src="../../assets/icons/eye.svg"></a></li>
-        <li><a routerLink="/liked"  class="nav-item"><img src="../../assets/icons/heart.svg"></a></li>
-        <li><a routerLink="/scheduled"  class="nav-item"><img src="../../assets/icons/clock.svg"></a></li>
-        <li><a routerLink="/profile"  class="nav-item"><img src="../../assets/icons/nav-user.svg"></a></li>
+        <li>
+            <a routerLink="/dashboard" routerLinkActive="selected" class="nav-item first">
+                <div>
+                    <img src="../../assets/icons/dashboard.svg">
+                    <span>Dashboard</span>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a routerLink="/auction" routerLinkActive="selected" class="nav-item" ng-click="load()">
+                <div>
+                    <img src="../../assets/icons/auction.svg">
+                    <span>Auctions</span>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a routerLink="/watched" routerLinkActive="selected" class="nav-item">
+                <div>
+                    <img src="../../assets/icons/eye.svg">
+                    <span>Watched</span>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a routerLink="/liked" routerLinkActive="selected" class="nav-item">
+                <div>
+                    <img src="../../assets/icons/heart.svg">
+                    <span>Liked</span>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a routerLink="/scheduled" routerLinkActive="selected" class="nav-item">
+                <div>
+                    <img src="../../assets/icons/clock.svg">
+                    <span>Scheduled</span>
+                </div>          
+            </a>
+        </li>
+        <li>
+            <a routerLink="/profile" routerLinkActive="selected" class="nav-item">
+                <div>
+                    <img src="../../assets/icons/nav-user.svg">
+                    <span>Profile</span>
+                </div>           
+            </a>
+        </li>
     </ul>
 </div>

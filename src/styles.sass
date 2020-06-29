@@ -1,7 +1,64 @@
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel'
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default'
+
 * 
- font-family: 'Open Sans',  
+ font-family: 'Nunito', sans-serif
 
  head, body 
   background: #F4F4F4
   margin: 0
   padding: 0
+  overflow-x: hidden !important
+  overflow-y: hidden !important
+body
+  height: 100vh
+  width: 100vw
+
+button
+    cursor: pointer
+    &:focus
+        outline: 0
+
+.md-drppicker 
+  .in-range
+    background: #DAEDFD !important
+  .table-condensed
+    border-spacing: 0px 2px !important
+  .active
+    background: #4285f4 !important
+    color: white !important
+  td 
+    height: 32px !important
+    width: 32px !important
+    border: 2px solid transparent !important
+    &:hover
+      border-color: #4285f4 !important
+      background: white !important
+      color: #333333 !important
+  .end-date
+    border-radius: 0px 100px 100px 0px !important
+  .start-date
+    border-radius: 100px 0px 0px 100px !important
+    &:before
+      position: relative !important
+      height: 36px !important
+      width: 36px !important
+      content: ""
+  .btn
+    background-color: #4285f4 !important
+    border-radius: 8px !important
+    padding: 0px 14px !important
+  .calendar-time
+    .select-item
+      font-size: 16px !important
+      option
+        &:hover
+          background-color: #4285f4 !important
+
+.my-panel .mat-dialog-container 
+  overflow: hidden
+  border-radius: 12px
+  padding: 5px
+
+::ng-deep .mat-input-underline 
+  display: none !important

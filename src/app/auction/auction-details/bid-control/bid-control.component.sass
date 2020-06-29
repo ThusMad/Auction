@@ -1,0 +1,97 @@
+$color-accent: #5b6bdc
+$color-hint: #706e8a
+$color-primary: #110d3c
+$color-active: #3246d3
+$color-notactive: #a2a4ac
+$color-bold: #120e3d
+
+.wrapper
+    width: 100%
+    display: flex
+    justify-content: center
+    align-items: center
+
+.bid-settings
+    display: flex
+    button
+        border: 0
+        padding: 15px 20px
+        background: white
+        border-radius: 10px
+        color: $color-hint
+        font-size: 16px
+    .bid
+        text-align: center
+        width: 80+px
+        color: $color-primary
+        font-size: 18px
+        font-weight: 600
+        margin: auto 10px
+
+.prop
+    margin-left: 30px
+    background: #55e0ff
+    border-radius: 25px
+    display: flex
+    flex-flow: column
+    flex-grow: 1
+
+.title
+    width: 100%
+    margin-top: 12px
+    padding-left: 25px
+    color: $color-primary
+    font-size: 18px
+    font-weight: 600
+
+.benefits
+    width: 100%
+    display: flex
+    justify-content: space-between
+    button  
+        margin-right: 20px
+        margin-top: 35px
+        background: #F7FAFF
+        border: 0
+        height: 35px
+        width: 100px
+        border-radius: 8px
+        font-size: 14px
+        font-weight: 600
+        color: $color-primary
+    ul
+        color: $color-primary
+        font-weight: 600
+        font-size: 14px
+
+mat-list-item
+    border-bottom: 1px solid #ededed
+    span
+        font-size: 22px
+        font-weight: 600
+    &:last-item
+        border-bottom: 0
+
+.bid-btn
+    width: 200px
+    height: 46px
+    background: $color-active !important
+    align-items: center
+    border-radius: 10px
+    border: 0
+    text-align: center
+    font-size: 18px
+    font-weight: 600
+    margin-top: 20px
+    color: white
+
+
+.shadow-hard
+    -webkit-box-shadow: 0px 4px 16px -4px rgba(0,0,0,0.15)
+    -moz-box-shadow: 0px 4px 16px -4px rgba(0,0,0,0.15)
+    box-shadow: 0px 4px 16px -4px rgba(0,0,0,0.15)
+
+.shadow-soft
+    -webkit-box-shadow: 7px 9px 25px -16px rgba(234, 237, 242, 1)
+    -moz-box-shadow: 7px 9px 25px -16px rgba(234, 237, 242, 1)
+    box-shadow: 7px 9px 25px -16px rgba(234, 237, 242, 1)

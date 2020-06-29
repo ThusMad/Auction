@@ -1,8 +1,16 @@
+import { Bage } from './bage.model';
+
 export class User {
-    id: number;
+    id: string;
     username: string;
-    password: string;
+    about: string;
+    email: string;
+    password?: string;
     firstName: string;
     lastName: string;
-    token?: string;
+    registrationDate?: number;
+    role: string;
+    token: string;
+    bages?: Bage[];
+    profilePicture?: string;
 }
