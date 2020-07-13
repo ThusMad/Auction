@@ -48,7 +48,7 @@ $color-bold: #120e3d
         padding: 0px 15px
 
     .payment-methods
-        height: 100%
+        height: 285px
         owl-carousel-o
             margin-left: 14px
             width: 100%
@@ -59,6 +59,28 @@ $color-bold: #120e3d
                 height: 205px
                 width: 345px
                 margin-right: 22px
+
+.card-empty
+    width: 100%
+    height: 100%
+    display: flex
+    flex-flow: column
+    align-items: center
+    justify-content: center
+    img
+        height: 40%
+    span
+        margin-top: 12px
+        font-size: 22px
+        font-weight: 600
+
+.spinner
+    width: 100%
+    height: 100%
+    display: flex
+    flex-flow: column
+    align-items: center
+    justify-content: center
 
 .payment-info
     width: 100%
@@ -74,6 +96,103 @@ $color-bold: #120e3d
 
 .stat
     width: 60%
+
+.card-menu 
+  background-color: #fafafa
+  padding: 4pt
+  font-size: 10pt
+  z-index: 1000
+  box-shadow: 0 0 12pt rgba(0, 0, 0, 0.25)
+  border-radius: 4pt
+  padding: 0.5em 0 0.5em 0
+  animation: fadeIn 0.1s ease-out
+  opacity:1.0
+  display:block
+
+
+
+.card-menu hr 
+  border: none
+  border-bottom: 1px solid #eee
+
+
+.card-menu div 
+  cursor: pointer
+  display: block
+  text-decoration: none
+  color: #333
+  padding: 0.5em 2em 0.5em 0.75em
+  max-width: 18em
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+
+
+.card-menu div:hover 
+  background-color: #333
+  color: #fff
+
+
+
+.card-menu div::before 
+  content: ''
+  float: left
+  margin-right: 0.75em
+  width: 0.5em
+  height: 1em
+  display: inline-block
+
+
+/* Animatinons */
+@-webkit-keyframes fadeIn 
+  from 
+    opacity: 0
+  
+  to 
+    opacity: 1.0
+  
+
+
+@keyframes fadeIn 
+  from 
+    opacity: 0
+  
+  to 
+    opacity: 1.0
+  
+
+
+@-webkit-keyframes fadeOut 
+  from 
+    opacity: 1.0
+  
+  to 
+    opacity: 0.0
+  
+
+
+@keyframes fadeOut 
+  from 
+    opacity: 1.0
+  
+  to 
+    opacity: 0.0
+  
+
+
+.is-fadingIn 
+  -webkit-animation: fadeIn 0.1s ease-out
+  animation: fadeIn 0.1s ease-out
+  opacity: 1.0
+  display: block
+
+
+.is-fadingOut 
+  -webkit-animation: fadeOut 0.1s ease-out
+  animation: fadeOut 0.1s ease-out
+  opacity: 0.0
+  display: block
+
 
 ::-webkit-scrollbar
         width: 5px

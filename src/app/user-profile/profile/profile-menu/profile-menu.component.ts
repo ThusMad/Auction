@@ -63,7 +63,9 @@ export class ProfileMenuComponent implements OnInit {
   navigateToActive() {
     setTimeout(() => {
       let element = (document.getElementsByClassName("active"))[0];
-      this.slider.nativeElement.style.left = this.offset(element).left + "px";
+      if(this.slider != undefined) {
+        this.slider.nativeElement.style.left = this.offset(element).left + "px";
+      }
     }, 100);
   }
 

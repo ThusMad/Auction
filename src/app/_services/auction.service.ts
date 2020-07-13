@@ -9,6 +9,7 @@ import { Observable, Subject } from 'rxjs';
 import { Bid } from '../_models/bid.model';
 import { webSocket } from 'rxjs/webSocket'
 import { WebSocketService } from './webSocket.service';
+import { User } from '../_models/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuctionService {
@@ -89,6 +90,52 @@ export class AuctionService {
                return auction; 
             })
         );
+    }
+
+    getCurrentPrice(auctionId : string) : Observable<number> {
+        return this.http.get<number>(`${environment.apiUrl}/auction/currentPrice`, {
+            params : {
+                auctionId : auctionId,
+                timestamp : new Date().getTime().toString(),
+                recvWindow : '500'
+            },
+            observe : "body"
+        })
+    }
+
+    getBids(auctionId : string, limit: number, offset : number) : Observable<Bid[]> {
+        return this.http.get<Bid[]>(`${environment.apiUrl}/auction/getAllBids`, {
+            params : {
+                id : auctionId,
+                limit : limit.toString(),
+                offset: offset.toString(),
+                timestamp : new Date().getTime().toString(),
+                recvWindow : '3000'
+            },
+            observe : "body"
+        })
+    }
+
+    placeBid(auctionId : string, bid : number) : Observable<any> {
+        return this.http.get<any>(`${environment.apiUrl}/auction/bid`, {
+            params : {
+                auctionId : auctionId,
+                price: bid.toString(),
+                timestamp : new Date().getTime().toString(),
+                recvWindow : "1000"
+            },
+            withCredentials : true
+        })
+    }
+
+    getParticipants(auctionId : string) : Observable<User[]> {
+        return this.http.get<User[]>(`${environment.apiUrl}/auction/getParticipants`, {
+            params : {
+                auctionId : auctionId,
+                timestamp : new Date().getTime().toString(),
+                recvWindow : "1000"
+            }
+        })
     }
 
     public create(item : AuctionItem, images : FormData) : Observable<AuctionItem> {

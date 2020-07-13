@@ -28,7 +28,7 @@ export class AuctionDashboardComponent implements OnInit {
   }
 
   index: number = 0;
-  
+  isLoadAvailable: boolean = true;
   filters: string = "";
 
   filterButtons = [
@@ -50,7 +50,7 @@ export class AuctionDashboardComponent implements OnInit {
     { text: 'Currently on action', isClicked: false,
     callback: () => {
       this.Auctions = [];
-      this.filters = `started`;
+      this.filters = `started;completed=false`;
       this.loadAuctions(5, 0);
     }},
   ]
@@ -88,27 +88,24 @@ export class AuctionDashboardComponent implements OnInit {
 
   loadAuctions(limit, offset) {
     (this.filters == "" ? this.auctionService.getAll(limit, offset) : this.auctionService.getAllWithFilter(limit, offset, this.filters)).subscribe(items => {
-      items.forEach(item => {
-        this.Auctions.push( 
-          {
-          isSelected : false,
-          auction : item
-          })
-      })
+      if(items.length > 0) {
+        items.forEach(item => {
+          this.Auctions.push( 
+            {
+            isSelected : false,
+            auction : item
+            })
+        })
+      }
+      if(items.length == 5) {
+        this.isLoadAvailable = true;
+      }
+      else {
+        this.isLoadAvailable = false;
+      }
     });
   }
 
-  loadWithFilter(limit, offset, filters) {
-    this.auctionService.getAllWithFilter(limit, offset, filters).subscribe(items => {
-      items.forEach(item => {
-        this.Auctions.push( 
-          {
-          isSelected : false,
-          auction : item
-          })
-      })
-    });
-  }
 
   loadMore() : void {
     let loaded = this.Auctions.length;

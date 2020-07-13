@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
@@ -58,6 +58,18 @@ export class PaymentService {
             params : {
                 timestamp : new Date().getTime().toString(),
                 recvWindow : '1000'
+            },
+            withCredentials : true
+        });
+    }
+
+    setDefaultPaymentMethod(id : string) : Observable<any> {
+        return this.http.post<any>(`${environment.apiUrl}/payment/methods/setDefault`, "",
+        {
+            params : {
+                timestamp : new Date().getTime().toString(),
+                recvWindow : '1000',  
+                methodId : id       
             },
             withCredentials : true
         });

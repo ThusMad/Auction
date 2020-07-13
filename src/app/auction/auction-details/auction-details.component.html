@@ -17,11 +17,11 @@
             </div>
             <div class="bidders">
                 <div class="profile-pics">
-                    <div *ngFor="let bidder of bidders" class="profile-pic" >
-                        <img [src]="bidder.img">
+                    <div *ngFor="let bidder of displayBidders" class="profile-pic" >
+                        <img [src]="bidder.profilePicture">
                     </div>
                     <span>
-                        {{bidders.length}} people participate in the auction
+                        {{bidders.length}} people participate in the auction...
                     </span>          
                 </div>
             </div>
@@ -86,55 +86,31 @@
             </div>
         </div>
     </div>
-    <div class="bid-block" *ngIf="this.auction.startTime < currentTime && !isLoading">
+    <div class="bid-block" *ngIf="!isLoading && this.auction.startTime < currentTime && this.auction.endTime > currentTime && !isLoading">
         <div class="bid-list">
             <h2>
                 Bids
             </h2>
-            <app-bidders-list></app-bidders-list>
+            <app-bidders-list [bids]="bids">
+
+            </app-bidders-list>
         </div>
         <div class="bid-controller">
             <h2>
                 Place Bid
             </h2>
             <div class="flex-item">
-                <div class="chart-container">
-                <canvas #myCanvas baseChart class="chart"  
-                            [datasets]="lineChartData"
-                            [labels]="lineChartLabels"
-                            [options]="lineChartOptions"
-                            [colors]="lineChartColors"
-                            [legend]="lineChartLegend"
-                            [chartType]="lineChartType"
-                            (chartHover)="chartHovered($event)"
-                            (chartClick)="chartClicked($event)"></canvas>
-                </div>
             </div>
             <div class="bid-ctrl">
-                <app-bid-control></app-bid-control>
+                <app-bid-control [bidStep]="this.auction.priceStep" [currentPrice]="currentPrice" [auctionId]="auctionId"></app-bid-control>
             </div>
         </div>
-        <div class="offers">
-            <h2>
-                You might be interested
-            </h2>
-            <mat-list>
-                <mat-list-item>
-                    <app-offer></app-offer>
-                </mat-list-item>
-                <mat-list-item>
-                    <app-offer></app-offer>
-                </mat-list-item>
-                <mat-list-item>
-                    <app-offer></app-offer>
-                </mat-list-item>
-                <mat-list-item>
-                    <app-offer></app-offer>
-                </mat-list-item>
-            </mat-list>
-        </div>
     </div>
-    <div class="countdown" *ngIf="this.auction.startTime > currentTime && !isLoading">
+    <div *ngIf="!isLoading && this.auction.endTime < currentTime" class="auction-ended">
+        <img src="../../../assets/icons/astronaut.svg">
+        <span>Auction is ended...</span>
+    </div>
+    <div class="countdown" *ngIf="!isLoading && this.auction.startTime > currentTime && !isLoading">
         <app-timer [creationDate]="auction.creationTime" [startDate]="auction.startTime"></app-timer>
     </div>
     <div *ngIf="isLoading" class="center">

@@ -27,7 +27,7 @@ export class AuthenticationService {
         }
     }
 
-    obtainToken(username: string, password: string) {
+    obtainToken(username: string, password: string) : Observable<any> {
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
         let requestBody = {
@@ -41,8 +41,8 @@ export class AuthenticationService {
                     timestamp: new Date().getTime().toString(),
                     recvWindow: '500'
                 },
-                observe: "response",
-                withCredentials: true
+                withCredentials: true,
+                observe: 'response' as 'response'
             })
             .pipe(map(response => {
                 console.log(response);
@@ -63,13 +63,12 @@ export class AuthenticationService {
                 recvWindow : '1000'
             },
             withCredentials : true,
-            observe : "response"
+            observe: 'response' as 'response'
         })
         .pipe(map((response:any) => {
             console.log(response);
             this.isAuthtorized = true;
             sessionStorage.setItem('authtorized', JSON.stringify(true));
-            this.router.navigate([this.returnUrl]);
             return response;
         }));
     }

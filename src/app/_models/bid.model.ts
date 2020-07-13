@@ -3,8 +3,8 @@ import { User } from './user.model';
 
 export class Bid {
     id: string;
-    auction: AuctionItem;
-    user: User;
+    auctionId: string;
+    userId: string;
     time: number;
-    amount: number;
+    price: number;
 }

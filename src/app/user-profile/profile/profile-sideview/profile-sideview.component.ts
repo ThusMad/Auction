@@ -36,10 +36,12 @@ export class ProfileSideviewComponent implements OnInit {
   ngOnInit(): void {
     this.image = new FormData();
 
-    this.userService.getRole().subscribe(role => {
-      this.role = role.replace(/['"]+/g, '');
-    })
     if(this.userId == "") {
+
+      this.userService.getRole().subscribe(role => {
+        this.role = role.replace(/['"]+/g, '');
+      })
+
       var current = sessionStorage.getItem('currentUser');
       if(current === null) {
         this.userService.get(this.userId).subscribe(user => {

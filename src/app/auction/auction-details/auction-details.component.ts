@@ -12,6 +12,8 @@ import { AuctionService } from 'src/app/_services/auction.service';
 import { map } from 'rxjs/operators';
 import { AuctionWebsocketService } from 'src/app/_services/auctionWebsocket.service';
 import { JsonPipe } from '@angular/common';
+import { Bid } from 'src/app/_models/bid.model';
+import { UserService } from 'src/app/_services/user.service';
 
 @Component({
   selector: 'app-auction-details',
@@ -23,122 +25,108 @@ export class AuctionDetailsComponent implements OnInit {
   private routeSub: Subscription;
   
   auctionId : string;
-
   isLoading : boolean = true;
 
   creationTime : string = "";
-  startTime : string= "";
-  endTime : string= "";
+  startTime : string = "";
+  endTime : string = "";
 
-  public lineChartData: ChartDataSets[] = [
-    { data: [1000, 1200, 2000, 2480, 2660]}
-  ];
-  public lineChartLabels: Label[] = [];
-  public lineChartOptions: (ChartOptions & { annotation: any }) = {
-    responsive: true,
-    layout: {
-      
-      padding: {
-          left: 50,
-          right: 50,
-          top: 10,
-          bottom: 10
-      }
-    },
-    scales: {
-      xAxes: [{
-        gridLines: {
-          drawBorder: false,
-          color: "transparent",
-          zeroLineWidth : 1,
-          zeroLineColor : "transparent"
-        },
-      }],
-      yAxes: [{
-        gridLines: {
-          display: false,
-          drawBorder: false
-        },
-        scaleLabel: {
-          display: false
-        },
-        ticks: {
-          display: false
-        }
-      }],
-    },
-    annotation: {
-      annotations: [
-        {
-          display : false,
-          type: 'line',
-          mode: 'vertical',
-          color: "#fff",
-          borderColor: 'transparent',
-          borderWidth: 0,
-          gridLines: "transparent"
-        }
-      ]
-    }
-  };
-  public lineChartColors: Color[] = [
-    { 
-      backgroundColor: '#a0d4f7',
-      borderColor: '#69b5e7',
-      pointBackgroundColor: '#69b5e7',
-      pointBorderColor: 'transparent',
-      pointHoverBackgroundColor: '#69b5e7',
-      pointHoverBorderColor: '#fff'
-    }
-  ];
-  public lineChartLegend = false;
-  public lineChartType = 'line';
+  bids : {
+    value: Bid,
+    user : User,
+    time: string
+  }[] = [];
 
-  bidders : any[] = [
-    {
-      img: "https://i.pinimg.com/236x/75/d9/d6/75d9d6a31977ebed4f2da313124ec3ea.jpg"
-    },
-    {
-      img: "https://i.insider.com/589dbb873149a101788b4c85?width=1100&format=jpeg&auto=webp"
-    },
-    {
-      img: "https://i.pinimg.com/originals/32/71/49/32714938459e9a14ac7b4ba42280f037.jpg"
-    },
-    {
-      img: "https://i.pinimg.com/236x/75/d9/d6/75d9d6a31977ebed4f2da313124ec3ea.jpg"
-    }
-  ]
+  currentPrice: number;
+
+  bidders : User[] = []
+  displayBidders : User[] = []
 
   startPrice : number = 1000;
   priceStep: number = 20;
   currentTime: number;
   intervalID: any;
 
-  constructor(private route: ActivatedRoute, private auctionService: AuctionService, private auctionWebsocket : AuctionWebsocketService) {
+  constructor(private route: ActivatedRoute,
+     private userService: UserService,
+     private auctionService: AuctionService, 
+     private auctionWebsocket : AuctionWebsocketService) {
     this.route.params.subscribe( 
       params =>  {
         console.log(params);
-        this.auctionService.get(params.id)
-        .subscribe(result => {
-          console.log(result);
+        this.auctionId = params.id;
+
+        this.auctionService.getCurrentPrice(this.auctionId).subscribe(price => {
+          this.currentPrice = price
+        });
+
+        this.auctionService.get(params.id).subscribe(result => {
           this.auction = result;
           this.calculateTime();
-          this.isLoading = false;
 
-          // this.auctionWebsocket.connect(params.id).subscribe(res => {
-          //   console.log(res);
-          // })
+          this.auctionWebsocket.connect(params.id).subscribe(event => {
+            let bid = JSON.parse(event.data);
+            this.currentPrice = bid.price;
+
+            this.addNewBid(bid);
+          })
+
+          this.isLoading = false;
         });
-        }
-      );
+
+        this.auctionService.getParticipants(params.id).subscribe(users => {
+          users.forEach(user => {
+            console.log(user);
+            
+            if(this.displayBidders.length < 3) {
+              this.displayBidders.push(user);
+            }
+
+            this.bidders.push(user);
+            let bid = this.bids.find(b => b.value.userId == user.id)
+            if(bid != null) {
+              bid.user = user;
+            }
+          })
+        })
+      }
+    );
       
   }
 
+  addNewBid(bid : Bid) {
+    if(this.bids.length > 9) {
+      this.bids.pop()
+    }
+
+    let user = this.bidders.find(b => b.id == bid.userId);
+
+    if(user != null) {
+      this.bids.unshift({
+        user : user,
+        value: bid,
+        time: new Date(bid.time * 1000).toLocaleTimeString()
+      })
+    }
+    else {
+      this.userService.get(bid.userId).pipe(
+        map(user => {
+          this.bidders.push(user);
+          this.bids.unshift({
+            user : user,
+            value: bid,
+            time: new Date(bid.time * 1000).toLocaleTimeString()
+          })
+        }));
+    }
+  }
+
   ngOnInit(): void {
-    this.lineChartLabels.push(new Date().toDateString());
-    this.lineChartLabels.push(new Date().toDateString());
-    this.lineChartLabels.push(new Date().toDateString());
-    this.lineChartLabels.push(new Date().toDateString());
+    this.auctionService.getBids(this.auctionId, 10, 0).subscribe(items => {
+      items.reverse().forEach(bid => {
+        this.addNewBid(bid);
+      });
+    });
   }
 
   calculateTime() {

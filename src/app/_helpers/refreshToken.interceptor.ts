@@ -33,58 +33,56 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
                 return throwError(error);
             }
 
-            console.log(error.status)
-
             if (error.status == 404) {
                 this.router.navigate(['/404']); 
                 return throwError(error);
             }
 
-            if (error.status !== 401) {
-                console.log(error);
-                
-                return throwError(error);
-            }
-
-            if (this.refreshTokenInProgress) {
-                return this.refreshTokenSubject.pipe(
-                    filter(result => result !== null),
-                    take(1),
-                    switchMap(() => next.handle(this.addAuthenticationToken(request)))
-                );             
-            } 
-            else {
-                this.refreshTokenInProgress = true;
-                this.refreshTokenSubject.next(null);
-    
-                // Call auth.refreshAccessToken(this is an Observable that will be returned)
-                return this.auth
-                    .refreshToken().pipe(
-                        switchMap((token: any) => {
-                            this.refreshTokenInProgress = false;
-                            this.refreshTokenSubject.next(token);
+            if (error.status == 401) {
+                if (this.refreshTokenInProgress) {
+                    return this.refreshTokenSubject.pipe(
+                        filter(result => result !== null),
+                        take(1),
+                        switchMap(() => next.handle(this.addAuthenticationToken(request)))
+                    );             
+                } 
+                else {
+                    this.refreshTokenInProgress = true;
+                    this.refreshTokenSubject.next(null);
         
-                            return next.handle(this.addAuthenticationToken(request));
-                        }),
-                        catchError((err: HttpErrorResponse) => {
-                            if(err.status === 401 && this.refreshTokenInProgress) {
-                                console.log("refresh failed");
-                                
+                    // Call auth.refreshAccessToken(this is an Observable that will be returned)
+                    return this.auth
+                        .refreshToken().pipe(
+                            switchMap((token: any) => {
                                 this.refreshTokenInProgress = false;
-                                this.auth.logout();
-                                console.log("prev url : " + this.routingState.getPreviousUrl());
-                                
-                                this.router.navigate(['/sign/in'], { queryParams: { returnUrl: this.routingState.getPreviousUrl() }});
-        
-                                return throwError(error);
-                            }
-
-                            this.snackBar.open(err.status + " " + err.error, "OK", {
-                                duration: 2000
-                            });
-                        })
-                    );
+                                this.refreshTokenSubject.next(token);
+            
+                                return next.handle(this.addAuthenticationToken(request));
+                            }),
+                            catchError((err: HttpErrorResponse) => {
+                                if((err.status === 401 || err.status === 404) && this.refreshTokenInProgress) {
+                                    console.log("refresh failed");
+                                    
+                                    this.refreshTokenInProgress = false;
+                                    this.auth.logout();
+                                    console.log("prev url : " + this.routingState.getPreviousUrl());
+                                    
+                                    this.router.navigate(['/sign/in'], { queryParams: { returnUrl: this.routingState.getPreviousUrl() }});
+            
+                                    return throwError(error);
+                                }
+                            })
+                        );
+                }
             }
+            else {
+                console.log(error);
+                // this.snackBar.open('Message', 'CLOSE', {
+                //     duration: 2000
+                // });
+            }
+                
+            return throwError(error);
         }));
     }
 

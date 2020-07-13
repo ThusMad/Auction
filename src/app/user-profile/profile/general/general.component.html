@@ -1,5 +1,5 @@
 <div class="general-wrapper">
-    <mat-list>
+    <mat-list *ngIf="!isLoading">
         <mat-list-item >
             <app-setting-input property="Name" value="{{user.firstName}} {{user.lastName}}"></app-setting-input>
         </mat-list-item>
@@ -18,4 +18,5 @@
             </button>
         </mat-list-item>
     </mat-list>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
 </div>

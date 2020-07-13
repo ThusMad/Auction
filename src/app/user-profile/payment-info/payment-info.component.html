@@ -10,11 +10,24 @@
             </button>
         </div>
         <div class="payment-methods">
-            <owl-carousel-o [options]="customOptions">
+            <owl-carousel-o *ngIf="!isCardLoading && !isCardEmpty" [options]="customOptions">
                 <ng-template *ngFor="let item of creditCards" carouselSlide>
-                    <app-credit-card [cardNumber] = "item.card.cardNumber" [isDefault]="item.isDefault" [experationTimestamp] = "item.card.expiration" carouselSlide></app-credit-card>
+                    <app-credit-card 
+                    [cardNumber] = "item.card.cardNumber" 
+                    [isDefault]="item.isDefault" 
+                    [experationTimestamp] = "item.card.expiration" 
+                    (contextmenu)="open($event, item); $event. preventDefault();"
+                    carouselSlide></app-credit-card>
                 </ng-template>
-              </owl-carousel-o>
+            </owl-carousel-o>
+            <div *ngIf="!isCardLoading && isCardEmpty" class="card-empty">
+                <img src="../../../assets/icons/bb2.svg">
+                <span> Beeeep.. BB-2 didn't find any cards </span>
+            </div>
+            <div class="spinner">
+                <mat-spinner *ngIf="isCardLoading"></mat-spinner>
+            </div>
+            
         </div>
     </div>
     <div class="payment-info">
@@ -34,3 +47,10 @@
         </div>
     </div>
 </div>
+
+<ng-template #cardMenu let-item>
+	<section class="card-menu">
+		<div (click)="delete(item)">Delete {{item.card.cardNumber}}</div>
+		<div (click)="makeDefault(item)">Set as default payment method</div>
+	</section>
+</ng-template>

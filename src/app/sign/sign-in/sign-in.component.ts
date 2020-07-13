@@ -1,9 +1,11 @@
 ﻿﻿import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
+import { first, map, catchError } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { MyErrorStateMatcher } from 'src/app/_errorMatcher/default.error-matcher';
+import { throwError } from 'rxjs';
+import { UserService } from 'src/app/_services/user.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -22,7 +24,8 @@ export class SignInComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private userService: UserService
     ) { 
         // redirect to home if already logged in
         if (this.authenticationService.isAuthtorized) { 
@@ -53,13 +56,14 @@ export class SignInComponent implements OnInit {
 
         this.loading = true;
         this.authenticationService.obtainToken(this.f.username.value, this.f.password.value)
-            .pipe(first())
-            .subscribe(
-                data => {
+        .subscribe(
+            data => {
+                this.userService.get("").subscribe(result => {
                     this.router.navigate([this.returnUrl]);
-                },
-                error => {
-                    this.loading = false;
-                });
+                });  
+            },
+            error => {
+                this.loading = false;
+            });
     }
 }

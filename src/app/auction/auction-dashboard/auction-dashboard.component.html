@@ -38,7 +38,7 @@
                     [auction]="item.auction"
                     [isSelected]="item.isSelected">
                 </app-auction-item>
-                <div class="load-btn shadow" (click)="loadMore()" >
+                <div *ngIf="isLoadAvailable" class="load-btn shadow" (click)="loadMore()" >
                     Load more
                 </div>
             </div>

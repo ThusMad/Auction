@@ -1,5 +1,5 @@
 <div class="wrapper">
-    <div class="view-wrapper">
+    <div *ngIf="!isEmpty" class="view-wrapper">
         <div class="content">   
             <div *ngIf="isLoading" class="spiner">
                 <mat-spinner></mat-spinner>
@@ -8,11 +8,13 @@
                 <app-auction-item *ngFor="let auction of Auctions" class="auction-item"
                     [auction]="auction">
                 </app-auction-item>
-                <div class="load-btn shadow" (click)="loadMore()" >
-                    Load more
-                </div>
             </div>
         </div>
+    </div>
+    <div *ngIf="isEmpty" class="empty">
+        <img src="../../../assets/icons/telescope.svg">
+        <span>You haven't watched anything yet</span>
+        <span class="route" routerLink="/auction/dashboard">Discover auctions!</span>
     </div>
 </div>
 

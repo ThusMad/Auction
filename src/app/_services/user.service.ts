@@ -14,14 +14,14 @@ export class UserService {
         return this.http.get<User[]>(`${environment.apiUrl}/account/getAll`);
     }
 
-    getById(userId : string) : Promise<User> {
+    getById(userId : string) : Observable<User> {
         return this.http.get<User>(`${environment.apiUrl}/account`, {
             params : {
                 userId : userId,
                 timestamp : new Date().getTime().toString(),
                 recvWindow : '1000'
             }
-        }).toPromise();
+        });
     }
 
     getFee() : Observable<number> {
@@ -55,7 +55,7 @@ export class UserService {
                 withCredentials : true
             })
             .pipe(map(result => {
-                return JSON.parse(JSON.parse(JSON.stringify(result)));
+                return JSON.parse(JSON.stringify(result));
             }));
         }
         else {
@@ -68,7 +68,7 @@ export class UserService {
             })
             .pipe(map(result => {
                 sessionStorage.setItem('currentUser', JSON.stringify(result));
-                return JSON.parse(JSON.parse(JSON.stringify(result)));
+                return JSON.parse(JSON.stringify(result));
             }));
         }
     }

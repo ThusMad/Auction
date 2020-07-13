@@ -10,7 +10,7 @@ export class HeadersInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
       request = request.clone({ 
-        params: request.params.set('timestamp', new Date().getTime().toString())
+        params: request.params.set('timestamp', new Date().getTime().toString()),
       });
 
       if (request.headers.has(InterceptorSkipHeader)) {

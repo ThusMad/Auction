@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { AuctionService } from 'src/app/_services/auction.service';
 
 @Component({
   selector: 'app-bid-control',
@@ -7,12 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BidControlComponent implements OnInit {
 
-  bidStep: number = 20;
-  сurrentPrice: number = 1000;
-  bid : number = this.сurrentPrice;
-  constructor() { }
+  @Input() auctionId = "";
+  @Input() bidStep = 0;
+  @Input() currentPrice: number = 0;
+
+
+  bid : number;
+
+  constructor(private auctionService : AuctionService) { }
 
   ngOnInit(): void {
+    this.bid = this.currentPrice;
+  }
+
+  placeBid() {
+    this.auctionService.placeBid(this.auctionId, this.bid).subscribe(res => {
+    });
   }
 
   increase() {
@@ -20,7 +31,15 @@ export class BidControlComponent implements OnInit {
   }
 
   decrease() {
-    this.bid -= this.bidStep;
+    if(this.bid != this.currentPrice) {
+      this.bid -= this.bidStep;      
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if(this.bid < this.currentPrice) {
+      this.bid = this.currentPrice;
+    }
   }
 
 }
