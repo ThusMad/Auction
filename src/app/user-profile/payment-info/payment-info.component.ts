@@ -122,9 +122,20 @@ export class PaymentInfoComponent implements OnInit {
 
   }
 
-  delete(card) {
-    console.log("deleting card with id : " + card.card.id);
+  deleteMethod(cardItem) {
+    console.log("deleting card with id : " + cardItem.card.id);
     
+    this.paymentService.deletePaymentMethod(cardItem.card.id).subscribe(res => {
+      const index = this.creditCards.indexOf(cardItem);
+      if (index > -1) {
+        this.creditCards.splice(index, 1);
+      }
+
+      this.paymentService.getDefault().subscribe(defaultMethod => {
+        this.creditCards.find(item => item.card.id == defaultMethod.id).isDefault = true;
+      })
+    });
+
     this.close();
   }
 

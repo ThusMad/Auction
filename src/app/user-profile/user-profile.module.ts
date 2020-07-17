@@ -25,6 +25,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatTreeModule } from '@angular/material/tree';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { PlusComponent } from './promotion/plus/plus.component';
 import { PremiumComponent } from './promotion/premium/premium.component';
 import { CardDialogComponent } from './payment-info/card-dialog/card-dialog.component';
@@ -43,6 +44,7 @@ import { GeneralComponent } from './profile/general/general.component';
 import { SettingInputComponent } from './profile/general/setting-input/setting-input.component';
 import { ProfileAuctionItemComponent } from './profile/profile-auctions/profile-auction-item/profile-auction-item.component';
 import { UserComponent } from './user/user.component';
+import { ReplenishDialogComponent } from './payment-info/dialogs/replenish-dialog/replenish-dialog.component';
 
 @NgModule({
     declarations: [
@@ -66,7 +68,8 @@ import { UserComponent } from './user/user.component';
       GeneralComponent, 
       SettingInputComponent, 
       ProfileAuctionItemComponent, 
-      UserComponent
+      UserComponent, 
+      ReplenishDialogComponent
     ],
     imports: [
       CommonModule,
@@ -79,6 +82,7 @@ import { UserComponent } from './user/user.component';
       MatDatepickerModule,
       MatNativeDateModule,
       MatFormFieldModule,
+      MatExpansionModule,
       Ng2TelInputModule,
       MatSelectModule,
       MatProgressSpinnerModule,

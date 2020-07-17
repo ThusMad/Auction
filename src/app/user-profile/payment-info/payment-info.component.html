@@ -24,7 +24,7 @@
                 <img src="../../../assets/icons/bb2.svg">
                 <span> Beeeep.. BB-2 didn't find any cards </span>
             </div>
-            <div class="spinner">
+            <div class="spinner" *ngIf="isCardLoading">
                 <mat-spinner *ngIf="isCardLoading"></mat-spinner>
             </div>
             
@@ -50,7 +50,7 @@
 
 <ng-template #cardMenu let-item>
 	<section class="card-menu">
-		<div (click)="delete(item)">Delete {{item.card.cardNumber}}</div>
+		<div (click)="deleteMethod(item)">Delete {{item.card.cardNumber}}</div>
 		<div (click)="makeDefault(item)">Set as default payment method</div>
 	</section>
 </ng-template>

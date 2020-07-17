@@ -29,19 +29,22 @@ import { MatListModule } from '@angular/material/list';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { HeadersInterceptor } from './_helpers/headers.interceptor';
 import { ChartsModule } from 'ng2-charts';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { RefreshTokenInterceptor } from './_helpers/refreshToken.interceptor';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { FaqComponent } from './faq/faq.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavigationComponent,
-    DashboardComponent
+    DashboardComponent,
+    FaqComponent
   ],
   imports: [
     BrowserModule,
@@ -68,6 +71,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatListModule,
     MatTreeModule,
     MatChipsModule,
+    MatExpansionModule,
     MatAutocompleteModule,
     ChartsModule,
     CarouselModule,

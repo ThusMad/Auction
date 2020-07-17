@@ -5,14 +5,36 @@
         unit="$" 
         backgroundColor="#dcdff2" 
         title="Own funds" 
-        iconUrl="../../../../../assets/icons/briefcase.svg">
+        iconUrl="../../../../../assets/icons/briefcase.svg"
+        (click)="replenish()">
+        <div class="refund">
+            <div class="icon">
+                <img src="../../../../assets/icons/credit-card-violet.svg">
+            </div>
+            <div>
+                <span>
+                    Replenish balance
+                </span>
+            </div>
+        </div>
     </app-limits-item>
     <app-limits-item 
         [value]="fee" 
         unit="%" 
         iconUrl="../../../../../assets/icons/tag.svg" 
         backgroundColor="#fdf2d3" 
+        routerLink="/faq/fee"
         title="Fee">
+        <div class="refund">
+            <div class="icon">
+                <img src="../../../../assets/icons/help-circle-orange.svg">
+            </div>
+            <div>
+                <span>
+                    Read Faq
+                </span>
+            </div>
+        </div>
     </app-limits-item>
     <app-limits-item 
         value="2,500" 
@@ -20,7 +42,18 @@
         unit="$" 
         iconUrl="../../../../../assets/icons/credit-card.svg" 
         backgroundColor="#fbeaea" 
+        routerLink="/faq/credit-limit"
         title="Credit limit">
+        <div class="refund">
+            <div class="icon">
+                <img src="../../../../assets/icons/help-circle-red.svg">
+            </div>
+            <div>
+                <span>
+                    Read Faq
+                </span>
+            </div>
+        </div>
     </app-limits-item>
 </div>
 

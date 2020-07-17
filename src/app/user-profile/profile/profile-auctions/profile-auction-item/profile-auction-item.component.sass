@@ -7,18 +7,23 @@ $color-bold: #120e3d
 
 .item-wrapper
   width: 100%
-  height: 36px
+  height: auto
   background: white
   border-radius: 26px
   border: 4px solid white
   display: flex
-  padding: 35px 0px
-  cursor: pointer
+  flex-flow: column
+  mat-expansion-panel-header
+    width: 100%
+    height: 106px
+    display: flex
+    cursor: pointer
   .info
     margin-top: 10px
     width: 100%
     margin-left: 55px
     display: flex
+    align-items: center
     justify-content: space-between
     .categories
       margin: 10px 0px
@@ -132,3 +137,43 @@ $color-bold: #120e3d
     padding-top: 2px
     color: $color-hint
     font-weight: 800
+
+.details
+  mat-spinner
+    height: 20px
+    margin: auto
+  .empty
+    height: 40px
+    width: 100%
+    text-align: center
+    font-size: 22px
+    font-weight: 600
+
+.winner-details
+  display: flex
+  align-items: center
+  justify-content: space-between
+  font-size: 18px
+  font-weight: 500
+  .bid
+    color: $color-bold
+    font-weight: 600
+    font-size: 20px
+  .winner
+    display: flex
+    align-items: center
+  .profile
+    cursor: pointer
+  img
+    height: 32px
+    border-radius: 100px
+    object-fit: cover
+    margin-left: 12px
+  button
+    border-radius: 6px
+    border: 0
+    color: white
+    background: $color-active
+    padding: 6px 14px
+    font-size: 20px
+    

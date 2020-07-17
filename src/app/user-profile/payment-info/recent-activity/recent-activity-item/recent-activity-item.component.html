@@ -1,16 +1,22 @@
 <div class="wrapper">
     <div class="info">
-        <img src="../../../../../assets/icons/send.svg">
+        <img *ngIf="transaction.transactionType == 1" src="../../../../../assets/icons/send.svg">
+        <img *ngIf="transaction.transactionType == 0" src="../../../../../assets/icons/download.svg">
         <div>
             <div class="receiver">
-                To: <span>@Hoxton25</span>   
+                {{transaction.description}}   
             </div>
-            <div class="reason">
+            <div class="reason" *ngIf="transaction.transactionType == 1">
                 Withdrawal from balance 
+            </div>
+            <div class="reason" *ngIf="transaction.transactionType == 0">
+                Refill balance
             </div>
         </div>
     </div>
     <div class="amount">
-        - 10000 <span class="currency">USD</span>
+        <span *ngIf="transaction.transactionType == 0">+</span> 
+        <span *ngIf="transaction.transactionType == 1">-</span> 
+        {{transaction.amount}} <span class="currency">USD</span>
     </div>
 </div>

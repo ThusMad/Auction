@@ -2,44 +2,42 @@
     position: relative
     width: 100%
     height: 100%
+    overflow: auto
 
 .content
     display: flex
     flex-flow: column
     width: 100%
-    height: 100%
+    height: 92%
 
 mat-list
     position: relative
     display: flex
     flex-flow: column
     width: 100%
-    height: 92%
+    height: calc( 100vh - 100px )
     margin-top: 30px
     left: 0
     overflow: auto
+    .mat-list-item 
+        height: auto
+    
 
 mat-list-item
     width: 90%
     display: block
-    height: 110px
-    margin-top: 93px
+    height: auto
+    margin-top: 20px
     &:first-child
-        margin-top: 26px
-    &:last-child
-        margin-bottom: -79px
-        padding-bottom: 5px
-        
+        margin-top: 0px
+
+.dummy
+    height: 50px
+
 app-profile-auction-item
     display: flex
     width: 94%
-    height: 115px
-
-.dummy
-    margin-top: 87px
-    display: flex
-    width: 94%
-    height: 115px
+    height: auto
 
 ::-webkit-scrollbar 
     width: 0px

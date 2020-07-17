@@ -1,38 +1,57 @@
-<div class="item-wrapper shadow">
-    <span class="state">Schedudled</span>
-    <div class="info">
-        <div class="header">
-         <h1>
-            {{auction.title}} 
-         </h1>
-         <div class="categories">
-            <span *ngFor="let category of auction.categories" class="category">
-                {{category.name}} 
-            </span>
-        </div>
-        </div>
-        <div class="properties">
-            <div class="properties-content">
-                <div class="property">
-                     <img class="icon" src="../../../assets/icons/trending-up.svg">
-                     <span class="value">{{auction.priceStep}} USD</span>
-                </div>
-                <div class="property">
-                 <img class="icon" src="../../../assets/icons/calendar-add.svg">
-                 <span class="value">
-                     {{creationTime}}
-                 </span>
-                 </div>
-                <div class="property">
+<mat-expansion-panel hideToggle class="item-wrapper shadow" (opened)="loadDetails()">
+    <mat-expansion-panel-header [collapsedHeight]="'106px'" [expandedHeight]="'106px'">
+        <span class="state">{{auctionStatus}}</span>
+        <div class="info">
+            <div class="header">
+             <h1>
+                {{auction.title}} 
+             </h1>
+             <div class="categories">
+                <span *ngFor="let category of auction.categories" class="category">
+                    {{category.name}} 
+                </span>
+            </div>
+            </div>
+            <div class="properties">
+                <div class="properties-content">
+                    <div class="property">
+                         <img class="icon" src="../../../assets/icons/trending-up.svg">
+                         <span class="value">{{auction.priceStep}} USD</span>
+                    </div>
+                    <div class="property">
                      <img class="icon" src="../../../assets/icons/calendar-add.svg">
                      <span class="value">
-                        {{startTime}} - <br>
-                        {{endTime}}
+                         {{creationTime}}
                      </span>
+                     </div>
+                    <div class="property">
+                         <img class="icon" src="../../../assets/icons/calendar-add.svg">
+                         <span class="value">
+                            {{startTime}} - <br>
+                            {{endTime}}
+                         </span>
+                    </div>
                 </div>
+                <span class="start-price">$ {{auction.startPrice}}</span>
             </div>
-            <span class="start-price">$ {{auction.startPrice}}</span>
+        </div>
+    </mat-expansion-panel-header>
+    <div class="details">
+        <mat-spinner *ngIf="isLoading"></mat-spinner>
+        <div class="empty" *ngIf="!isInAction && !isHaveBids">
+            Oops... looks like there are no participants, your auction ended without any results :(
+        </div>
+        <div class="empty" *ngIf="isInAction">
+            Auction is currently in progress, please wait until the end of the auction to get results...
+        </div>
+        <div class="winner-details" *ngIf="!isInAction && isHaveBids">
+            <div class="">
+                <span>Higher bid: <span class="bid">{{winnerBid.price}} $</span></span>
+            </div>
+            <div class="winner">
+                Winner: <i class="profile" [routerLink]="'/user/'+winner.id">&nbsp;{{winner.username}}</i> <img [src]="winner.profilePicture">
+            </div>
+            <button (click) ="requestPayment()">Request Payment</button>
         </div>
     </div>
- </div>
- 
+  </mat-expansion-panel>

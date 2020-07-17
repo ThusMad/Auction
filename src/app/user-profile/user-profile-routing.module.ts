@@ -7,6 +7,7 @@ import { ProfileAuctionsComponent } from './profile/profile-auctions/profile-auc
 import { ProfileSettingsComponent } from './profile/profile-settings/profile-settings.component';
 import { GeneralComponent } from './profile/general/general.component';
 import { UserComponent } from './user/user.component';
+import { ReplenishDialogComponent } from './payment-info/dialogs/replenish-dialog/replenish-dialog.component';
 
 const profileRoutes: Routes = [
     {

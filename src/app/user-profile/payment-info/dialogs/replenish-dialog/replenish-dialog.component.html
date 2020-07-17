@@ -1,0 +1,19 @@
+<div class="wrapper">
+    <mat-list>
+        <mat-list-item *ngFor="let card of cards">
+            <div class="card-item" [class.selected]="card.isSelected" (click)="select(card)">
+                <div class="card-info">
+                    <img src="../../../../../assets/icons/payment/mastercard.svg">
+                    <span>{{card.method.cardNumber}}</span>
+                </div>
+                <img *ngIf="card.isSelected" class="checkbox" src="../../../../../assets/icons/check.svg">
+            </div>
+        </mat-list-item>
+    </mat-list>
+    <div class="inpt-wrapper shadow">
+        <input type="number" min="0" [value]="amount" (input)="amount = $event.target.value">
+    </div>
+    <button (click)="replenish()">
+        Replenish
+    </button>
+</div>

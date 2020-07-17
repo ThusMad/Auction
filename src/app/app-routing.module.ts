@@ -35,6 +35,10 @@ const routes: Routes = [
     redirectTo: "user"
   },
   {
+    path: 'faq',
+    redirectTo: "faq"
+  },
+  {
     path : "auction", 
     redirectTo: "auction",
     canActivate: [AuthGuard]

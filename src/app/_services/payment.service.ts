@@ -18,7 +18,10 @@ export class PaymentService {
                 recvWindow : '1000'
             },
             withCredentials : true
-        });
+        }).pipe(map(result => {
+            sessionStorage.setItem("paymentMethods", JSON.stringify(result))
+            return result;
+        }));
     }
 
     getPaymentMethodById(methodId : string) : Observable<PaymentMethodItem> {
@@ -38,7 +41,10 @@ export class PaymentService {
                 recvWindow : '1000'
             },
             withCredentials : true
-        });
+        }).pipe(map(result => {
+            sessionStorage.setItem("defaultPaymentMethod", JSON.stringify(result))
+            return result;
+        }));;
     }
 
     addPaymentMethod(method: PaymentMethodItem) : Observable<PaymentMethodItem> {
@@ -70,6 +76,30 @@ export class PaymentService {
                 timestamp : new Date().getTime().toString(),
                 recvWindow : '1000',  
                 methodId : id       
+            },
+            withCredentials : true
+        });
+    }
+
+    deletePaymentMethod(id : string) : Observable<any> {
+        return this.http.delete<any>(`${environment.apiUrl}/payment/methods/delete`,
+        {
+            params : {
+                timestamp : new Date().getTime().toString(),
+                recvWindow : '1000',  
+                id : id       
+            },
+            withCredentials : true
+        });
+    }
+
+    createPayment(id : string) : Observable<any> {
+        return this.http.post<any>(`${environment.apiUrl}/payment/create`, "",
+        {
+            params : {
+                timestamp : new Date().getTime().toString(),
+                recvWindow : '1000',  
+                auctionId : id       
             },
             withCredentials : true
         });

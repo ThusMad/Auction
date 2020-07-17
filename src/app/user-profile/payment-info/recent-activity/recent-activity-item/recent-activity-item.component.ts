@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { BalanceTransactionItem } from 'src/app/_models/balanceTransaction.model';
 
 @Component({
   selector: 'app-recent-activity-item',
@@ -8,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class RecentActivityItemComponent implements OnInit {
 
   constructor() { }
+
+  @Input() transaction: BalanceTransactionItem;
 
   ngOnInit(): void {
   }
