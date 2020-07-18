@@ -5,6 +5,7 @@ import { Observable, throwError } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
 import { PaymentMethodItem } from '../_models/paymentMethod.model';
 import { PaymentStatisticItem } from '../_models/paymentStatistic.model';
+import { PaymentItem } from '../_models/payment.model';
 
 
 @Injectable({ providedIn: 'root' })
@@ -22,6 +23,23 @@ export class PaymentService {
             sessionStorage.setItem("paymentMethods", JSON.stringify(result))
             return result;
         }));
+    }
+
+    getAllPayments(limit? : number, offset? : number) : Observable<PaymentItem[]> {
+        let urlParams = new HttpParams()
+        urlParams.append("timestamp", new Date().getTime().toString());
+        urlParams.append("recvWindow", '1000');
+        if(limit != null){ 
+            urlParams.append("limit", limit.toString());
+        }
+        if(offset != null) {
+            urlParams.append("offset", offset.toString());
+        }
+
+        return this.http.get<PaymentItem[]>(`${environment.apiUrl}/payment/getAll`, {
+            params : urlParams,
+            withCredentials : true
+        });
     }
 
     getPaymentMethodById(methodId : string) : Observable<PaymentMethodItem> {

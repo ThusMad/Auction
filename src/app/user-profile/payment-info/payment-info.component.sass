@@ -9,9 +9,10 @@ $color-bold: #120e3d
     position: relative
     display: flex
     flex-flow: column    
-    height: 100%
+    height: calc( 100vh - 100px )
     width: 100%
     padding-right: 20px
+    overflow: auto
     hr
         width: 90%
         margin-left: 0
@@ -22,7 +23,8 @@ $color-bold: #120e3d
     margin-left: 20px
     margin-top: 30px
     display: flex
-
+.payments
+  width: 100%
 .payment-methods-wrapper
     position: relative
     width: 100%

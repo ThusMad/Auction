@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler,HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError, timer } from 'rxjs';
 import { AuthenticationService } from '../_services/authentication.service';
 import { catchError, take, pairwise } from 'rxjs/operators';
 import { switchMap } from 'rxjs/operators';
@@ -36,6 +36,15 @@ export class RefreshTokenInterceptor implements HttpInterceptor {
             if (error.status == 404) {
                 this.router.navigate(['/404']); 
                 return throwError(error);
+            }
+            if (error.status == 466) {
+                console.log("retry...");
+                return timer(1200).pipe(
+                    switchMap( 
+                        () => next.handle(request.clone({
+                            params: request.params.set("timestamp", new Date().getTime().toString())
+                        })))
+                  )
             }
 
             if (error.status == 401) {

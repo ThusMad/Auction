@@ -1,0 +1,31 @@
+<div class="wrapper">
+    <h2>Payments list</h2>
+    <table mat-table [dataSource]="dataSource" class="shadow">
+        <!-- Id Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let element"> {{getIndexValue(element.id)}}</td>
+        </ng-container>
+
+        <!-- description Column -->
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+        </ng-container>
+
+        <!-- amount Column -->
+        <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef> Amount </th>
+            <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+        </ng-container>
+
+        <!-- PaymentType Column -->
+        <ng-container matColumnDef="paymentType">
+            <th mat-header-cell *matHeaderCellDef> PaymentType </th>
+            <td mat-cell *matCellDef="let element"> {{letType[element.paymentType]}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay" class="table-row"></tr>
+    </table>
+</div>

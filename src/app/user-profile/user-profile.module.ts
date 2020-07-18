@@ -45,6 +45,7 @@ import { SettingInputComponent } from './profile/general/setting-input/setting-i
 import { ProfileAuctionItemComponent } from './profile/profile-auctions/profile-auction-item/profile-auction-item.component';
 import { UserComponent } from './user/user.component';
 import { ReplenishDialogComponent } from './payment-info/dialogs/replenish-dialog/replenish-dialog.component';
+import { PaymentsListComponent } from './payment-info/payments-list/payments-list.component';
 
 @NgModule({
     declarations: [
@@ -69,7 +70,7 @@ import { ReplenishDialogComponent } from './payment-info/dialogs/replenish-dialo
       SettingInputComponent, 
       ProfileAuctionItemComponent, 
       UserComponent, 
-      ReplenishDialogComponent
+      ReplenishDialogComponent, PaymentsListComponent
     ],
     imports: [
       CommonModule,
